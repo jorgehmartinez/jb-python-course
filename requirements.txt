@@ -1,0 +1,9 @@
+jupyter-book
+matplotlib
+numpy
+statsmodels
+scipy
+seaborn
+pandas
+wbgapi
+ghp-import

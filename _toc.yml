@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: False
+chapters:
+- file: python_notebooks/Lecture_2.ipynb
+- file: python_notebooks/Lecture_3.ipynb
+- file: python_notebooks/Lecture_4.ipynb
+- file: python_notebooks/Lecture_5.ipynb
+- file: python_notebooks/Lecture_6.ipynb
+- file: python_notebooks/Lecture_8.ipynb
+- file: python_notebooks/Lecture_9.ipynb
+- file: python_notebooks/Lecture_10.ipynb
+- file: python_notebooks/Lecture_11.ipynb
+- file: python_notebooks/Lecture_12.ipynb
