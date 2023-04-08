@@ -166,16 +166,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intermediate level</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lecture_7.html">7. Web Scraping</a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="Lecture_8.html">8. API</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Visualization: Seaborn</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_10.html">10. Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_11.html">11. Folium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_12.html">12.  Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_13.html">13. Natural Language Processing (NLP)</a></li>
 </ul>
 
     </div>
@@ -386,7 +382,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantities">1. Quantities:</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantities">9.1. Quantities:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-following-database-includes-enaho-modules-200-300-and-500-for-the-period-2011-20119">The following database includes enaho modules (200, 300 and 500) for the period 2011 - 20119</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-companies-classification-by-number-of-workers-hired">Number of companies classification by number of workers hired</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-countplot-and-one-color-red">Vertical Countplot and one color (red)</a></li>
@@ -399,7 +395,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportions">2. Proportions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportions">9.2. Proportions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pie">Pie</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-at-all-collapse-dataframe-to-count-categories-of-a-variable">First at all, collapse dataframe to count categories of a variable</a></li>
 </ul>
@@ -407,7 +403,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#donuts">Donuts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">3. Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">9.3. Distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-intervals">Reducing intervals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-histograms">Multiple histograms</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#real-salary-per-hour-density">Real salary per hour density:</a></li>
@@ -421,7 +417,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot-real-salary-and-education">Box plot real salary and education</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships">4. Relationships</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships">9.4. Relationships</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter plot</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reggresion-real-salary-per-hour-and-non-labor-income-by-strata">Reggresion real salary per hour and  non-labor income by strata</a></li>
 </ul>
@@ -432,13 +428,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-in-a-single-image">Series in a single image</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-line-plots">Dual-line Plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-rate-and-monetary-policy-reaction">Exchange rate and monetary policy reaction</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#library-of-plots">Library of plots</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-package">Seaborn package:</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">9.5 Reference:</a></li>
 </ul>
             </nav>
         </div>
@@ -453,9 +447,9 @@ document.write(`
   <div class="tex2jax_ignore mathjax_ignore section" id="visualization-seaborn">
 <h1>9. Visualization: Seaborn<a class="headerlink" href="#visualization-seaborn" title="Permalink to this headline">#</a></h1>
 <div class="section" id="quantities">
-<h2>1. Quantities:<a class="headerlink" href="#quantities" title="Permalink to this headline">#</a></h2>
+<h2>9.1. Quantities:<a class="headerlink" href="#quantities" title="Permalink to this headline">#</a></h2>
 <p>This type of graph shows the levels of variables. Also, these graphs show the variables according to categories or classifications.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -463,19 +457,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;seaborn&#39;
 </pre></div>
 </div>
 </div>
@@ -1196,7 +1177,7 @@ Name: conglome, Length: 160772, dtype: object
 </div>
 </div>
 <div class="section" id="proportions">
-<h2>2. Proportions<a class="headerlink" href="#proportions" title="Permalink to this headline">#</a></h2>
+<h2>9.2. Proportions<a class="headerlink" href="#proportions" title="Permalink to this headline">#</a></h2>
 <p>Understandable plots to show categorical variables. Use this plots to explain participations from categories.</p>
 <div class="section" id="pie">
 <h3>Pie<a class="headerlink" href="#pie" title="Permalink to this headline">#</a></h3>
@@ -1449,7 +1430,7 @@ Name: conglome, Length: 160772, dtype: object
 </div>
 </div>
 <div class="section" id="distributions">
-<h2>3. Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">#</a></h2>
+<h2>9.3. Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">#</a></h2>
 <p>Distribution plots visually assess the distribution of sample data by comparing the empirical distribution of the data with the theoretical values expected from a specified distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1647,7 +1628,7 @@ C:\ProgramData\Anaconda3\lib\site-packages\seaborn\axisgrid.py:703: FutureWarnin
 </div>
 </div>
 <div class="section" id="relationships">
-<h2>4. Relationships<a class="headerlink" href="#relationships" title="Permalink to this headline">#</a></h2>
+<h2>9.4. Relationships<a class="headerlink" href="#relationships" title="Permalink to this headline">#</a></h2>
 <p>Charts used for both time series and cross-sectional data. These graphs allow to establish certain evidence of correlation or relationships between variables.</p>
 <div class="section" id="scatter-plot">
 <h3>Scatter plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">#</a></h3>
@@ -2018,19 +1999,15 @@ linewidths = “The linewidth of the marker edges.”</p>
 </div>
 </div>
 </div>
+</div>
+</div>
 <div class="section" id="reference">
-<h4>Reference:<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h4>
-</div>
-<div class="section" id="library-of-plots">
-<h4>Library of plots<a class="headerlink" href="#library-of-plots" title="Permalink to this headline">#</a></h4>
+<h2>9.5 Reference:<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h2>
+<p><strong>Library of plots:</strong></p>
 <p><a class="reference external" href="https://www.python-graph-gallery.com/stacked-and-percent-stacked-barplot">https://www.python-graph-gallery.com/stacked-and-percent-stacked-barplot</a></p>
-</div>
-<div class="section" id="seaborn-package">
-<h4>Seaborn package:<a class="headerlink" href="#seaborn-package" title="Permalink to this headline">#</a></h4>
+<p><strong>Seaborn package:</strong></p>
 <p><a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">https://seaborn.pydata.org/generated/seaborn.catplot.html</a></p>
 <p><a class="reference external" href="https://programmerclick.com/article/54791895404/">https://programmerclick.com/article/54791895404/</a></p>
-</div>
-</div>
 </div>
 </div>
 
@@ -2101,7 +2078,7 @@ linewidths = “The linewidth of the marker edges.”</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantities">1. Quantities:</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantities">9.1. Quantities:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-following-database-includes-enaho-modules-200-300-and-500-for-the-period-2011-20119">The following database includes enaho modules (200, 300 and 500) for the period 2011 - 20119</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-companies-classification-by-number-of-workers-hired">Number of companies classification by number of workers hired</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-countplot-and-one-color-red">Vertical Countplot and one color (red)</a></li>
@@ -2114,7 +2091,7 @@ linewidths = “The linewidth of the marker edges.”</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportions">2. Proportions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proportions">9.2. Proportions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pie">Pie</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-at-all-collapse-dataframe-to-count-categories-of-a-variable">First at all, collapse dataframe to count categories of a variable</a></li>
 </ul>
@@ -2122,7 +2099,7 @@ linewidths = “The linewidth of the marker edges.”</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#donuts">Donuts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">3. Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions">9.3. Distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-intervals">Reducing intervals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-histograms">Multiple histograms</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#real-salary-per-hour-density">Real salary per hour density:</a></li>
@@ -2136,7 +2113,7 @@ linewidths = “The linewidth of the marker edges.”</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot-real-salary-and-education">Box plot real salary and education</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships">4. Relationships</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationships">9.4. Relationships</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter plot</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reggresion-real-salary-per-hour-and-non-labor-income-by-strata">Reggresion real salary per hour and  non-labor income by strata</a></li>
 </ul>
@@ -2147,13 +2124,11 @@ linewidths = “The linewidth of the marker edges.”</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-in-a-single-image">Series in a single image</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-line-plots">Dual-line Plots</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-rate-and-monetary-policy-reaction">Exchange rate and monetary policy reaction</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#library-of-plots">Library of plots</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-package">Seaborn package:</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">9.5 Reference:</a></li>
 </ul>
   </nav></div>
 

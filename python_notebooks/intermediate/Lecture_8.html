@@ -166,11 +166,6 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Intermediate level</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lecture_7.html">7. Web Scraping</a></li>
-
-
-
-
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_9.html">9. Visualization: Seaborn</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_10.html">10. Geopandas</a></li>
@@ -486,26 +481,14 @@ via the Maps JavaScript API to demonstrate basic functionality. <a class="refere
 <div class="section" id="geocoding-latitude-longitude-lookup-parameters-required-to-make-the-request">
 <h3>Geocoding (latitude / longitude lookup). Parameters required to make the request:<a class="headerlink" href="#geocoding-latitude-longitude-lookup-parameters-required-to-make-the-request" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
-<li><p>address</p></li>
-<li><p>key - You have to register, $ 200 free entry - AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM. Please only for class</p></li>
-<li><p>language</p></li>
-<li><p>region - for countries using <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_3166-1">https://en.wikipedia.org/wiki/ISO_3166-1</a></p></li>
+<li><p><strong>address</strong></p></li>
+<li><p><strong>key:</strong> You have to register, $ 200 free entry</p></li>
+<li><p><strong>language</strong></p></li>
+<li><p><strong>region:</strong> for countries using <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a></p></li>
 </ul>
-<p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters">https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters</a>
-outputFormat
-parameters</p>
-<p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=colegio+guadalupe+lima&amp;amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM&amp;amp;language=es&amp;amp;region=pe">https://maps.googleapis.com/maps/api/geocode/json?address=colegio+guadalupe+lima&amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM&amp;language=es&amp;region=pe</a>
-<a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=universidad+catolica+pucp&amp;amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM&amp;amp;language=es&amp;amp;region=pe">https://maps.googleapis.com/maps/api/geocode/json?address=universidad+catolica+pucp&amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM&amp;language=es&amp;region=pe</a></p>
-<p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=colegio+guadalupe+lima&amp;amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;amp;language=es&amp;amp;region=pe">https://maps.googleapis.com/maps/api/geocode/json?address=colegio+guadalupe+lima&amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;language=es&amp;region=pe</a></p>
 </div>
 <div class="section" id="a-id-8-3-1-8-3-1-example-a">
 <h3><a id ='8.3.1.'>8.3.1. Example</a><a class="headerlink" href="#a-id-8-3-1-8-3-1-example-a" title="Permalink to this headline">#</a></h3>
-<ol class="arabic simple">
-<li><p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheater+Parkway,+Mountain+View,+CA&amp;amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;amp;language=en">https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheater+Parkway,+Mountain+View,+CA&amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;language=en</a></p></li>
-</ol>
-<ol class="arabic simple" start="2">
-<li><p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=Avenida+Alfonso+Ugarte+1227,+Cercado+de+Lima+15001&amp;amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;amp;language=es">https://maps.googleapis.com/maps/api/geocode/json?address=Avenida+Alfonso+Ugarte+1227,+Cercado+de+Lima+15001&amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;language=es</a></p></li>
-</ol>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheater+Parkway,+Mountain+View,+CA&amp;amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;amp;language=en">https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheater+Parkway,+Mountain+View,+CA&amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;language=en</a></p></li>
 <li><p><a class="reference external" href="https://maps.googleapis.com/maps/api/geocode/json?address=Avenida+Alfonso+Ugarte+1227,+Cercado+de+Lima+15001&amp;amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;amp;language=es">https://maps.googleapis.com/maps/api/geocode/json?address=Avenida+Alfonso+Ugarte+1227,+Cercado+de+Lima+15001&amp;key=AIzaSyAJS5pOyd3e3ltMQhi53rfoVL34a0bso44&amp;language=es</a></p></li>
@@ -556,12 +539,17 @@ the same language, which is chosen from the first component.</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">re1</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;results&#39;: [{&#39;address_components&#39;: [{&#39;long_name&#39;: &#39;1801&#39;,
      &#39;short_name&#39;: &#39;1801&#39;,
@@ -600,14 +588,20 @@ the same language, which is chosen from the first component.</p>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_json</span> <span class="o">=</span> <span class="n">re1</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">data_json</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;results&#39;: [{&#39;address_components&#39;: [{&#39;long_name&#39;: &#39;1801&#39;,
      &#39;short_name&#39;: &#39;1801&#39;,
@@ -646,6 +640,7 @@ the same language, which is chosen from the first component.</p>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -742,8 +737,8 @@ the same language, which is chosen from the first component.</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span> <span class="sa">r</span><span class="s1">&#39;../_data/ID_Routes_firms.csv&#39;</span> <span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
     <span class="n">readCSV</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="n">town</span> <span class="o">=</span> <span class="p">[]</span>
@@ -755,6 +750,11 @@ the same language, which is chosen from the first component.</p>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1401, 261, 699, 1, Alpnach, Obwalden, Zürich, Zürich, Alpnach,Obwalden, Zürich,Zürich, 46.9380412,8.2701754, 47.3768866,8.541694, 1
 1507, 261, 712, 1, Hergiswil (NW), Nidwalden, Zürich, Zürich, Hergiswil (NW),Nidwalden, Zürich,Zürich, 46.9905821,8.3083735, 47.3768866,8.541694, 2
@@ -1197,6 +1197,7 @@ the same language, which is chosen from the first component.</p>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3913,12 +3914,17 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -4751,6 +4757,7 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
   </tbody>
 </table>
 </div></div></div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4961,8 +4968,8 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 <h3>8.4.2. Request Example<a class="headerlink" href="#request-example" title="Permalink to this headline">#</a></h3>
 <p>Go To Toledo a Madrid!!!<br />
 <a class="reference external" href="https://maps.googleapis.com/maps/api/directions/json?origin=Toledo&amp;amp;destination=Madrid&amp;amp;region=es&amp;amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM">https://maps.googleapis.com/maps/api/directions/json?origin=Toledo&amp;destination=Madrid&amp;region=es&amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">re1</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s2">&quot;https://maps.googleapis.com/maps/api/directions/json?origin=Toledo&amp;destination=Madrid&amp;region=es&amp;key=AIzaSyAXkyaFmn5RRfackh9Fe_4TwgkZjljKSPM&quot;</span><span class="p">)</span>
 
 <span class="n">data_json</span> <span class="o">=</span> <span class="n">re1</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -4970,6 +4977,11 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;geocoded_waypoints&#39;: [{&#39;geocoder_status&#39;: &#39;OK&#39;,
    &#39;place_id&#39;: &#39;ChIJ8f21C60Lag0R_q11auhbf8Y&#39;,
@@ -5130,6 +5142,7 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5332,13 +5345,18 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">legs</span> <span class="o">=</span> <span class="n">directions</span><span class="p">[</span><span class="s1">&#39;routes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;legs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">legs</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;distance&#39;: {&#39;text&#39;: &#39;11.7 km&#39;, &#39;value&#39;: 11682},
  &#39;duration&#39;: {&#39;text&#39;: &#39;31 mins&#39;, &#39;value&#39;: 1836},
@@ -5454,6 +5472,7 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </div>
 </div>
@@ -5911,12 +5930,17 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </div>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "e8c94711c67b40609d38b8907fb07fb7", "version_major": 2, "version_minor": 0}</script></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance_info</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.80000e+01, 2.19000e+02, 2.19426e+05, 2.16000e+02, 8.17800e+03,
         2.70000e+01, 7.59100e+03],
@@ -5965,6 +5989,7 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -6299,14 +6324,19 @@ Please use `tqdm.notebook.tqdm` instead of `tqdm.tqdm_notebook`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geodata</span><span class="p">[[</span><span class="s1">&#39;lat_orig&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_orig&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">geodata</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">geodata</span><span class="p">[[</span><span class="s1">&#39;lat_dest&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_dest&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">geodata</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">geodata</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_33620/829315845.py:1: FutureWarning: In a future version of pandas all arguments of StringMethods.split except for the argument &#39;pat&#39; will be keyword-only.
   geodata[[&#39;lat_orig&#39;, &#39;lon_orig&#39;]] = geodata[&#39;origin&#39;].str.split(&#39;,&#39;, 1, expand=True)
@@ -6564,14 +6594,20 @@ C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_33620/829315845.py:2: FutureWarni
 </table>
 <p>438 rows × 16 columns</p>
 </div></div></div>
+</details>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geodata_10p</span> <span class="o">=</span> <span class="n">geodata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">geodata_10p</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -7031,6 +7067,7 @@ C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_33620/829315845.py:2: FutureWarni
   </tbody>
 </table>
 </div></div></div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -7046,12 +7083,17 @@ C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_33620/829315845.py:2: FutureWarni
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dir_results</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -7627,6 +7669,7 @@ C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_33620/829315845.py:2: FutureWarni
 </table>
 <p>22 rows × 24 columns</p>
 </div></div></div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
