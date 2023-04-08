@@ -1,0 +1,107 @@
+Traceback (most recent call last):
+  File "C:\Python\Python311\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Python\Python311\Lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python\Python311\Lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python\Python311\Lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python\Python311\Lib\asyncio\base_events.py", line 650, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Python\Python311\Lib\contextlib.py", line 222, in __aexit__
+    await self.gen.athrow(typ, value, traceback)
+  File "C:\Python\Python311\Lib\site-packages\nbclient\client.py", line 608, in async_setup_kernel
+    yield
+  File "C:\Python\Python311\Lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Python\Python311\Lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Python\Python311\Lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+driver.find_element( By.ID, 'select_ambito').click()
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNoSuchElementException[0m                    Traceback (most recent call last)
+Cell [1;32mIn[30], line 1[0m
+[1;32m----> 1[0m [43mdriver[49m[38;5;241;43m.[39;49m[43mfind_element[49m[43m([49m[43m [49m[43mBy[49m[38;5;241;43m.[39;49m[43mID[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mselect_ambito[39;49m[38;5;124;43m'[39;49m[43m)[49m[38;5;241m.[39mclick()
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py:831[0m, in [0;36mWebDriver.find_element[1;34m(self, by, value)[0m
+[0;32m    828[0m     by [38;5;241m=[39m By[38;5;241m.[39mCSS_SELECTOR
+[0;32m    829[0m     value [38;5;241m=[39m [38;5;124mf[39m[38;5;124m'[39m[38;5;124m[name=[39m[38;5;124m"[39m[38;5;132;01m{[39;00mvalue[38;5;132;01m}[39;00m[38;5;124m"[39m[38;5;124m][39m[38;5;124m'[39m
+[1;32m--> 831[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mCommand[49m[38;5;241;43m.[39;49m[43mFIND_ELEMENT[49m[43m,[49m[43m [49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43musing[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mby[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mvalue[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mvalue[49m[43m}[49m[43m)[49m[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m]
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py:440[0m, in [0;36mWebDriver.execute[1;34m(self, driver_command, params)[0m
+[0;32m    438[0m response [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mcommand_executor[38;5;241m.[39mexecute(driver_command, params)
+[0;32m    439[0m [38;5;28;01mif[39;00m response:
+[1;32m--> 440[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43merror_handler[49m[38;5;241;43m.[39;49m[43mcheck_response[49m[43m([49m[43mresponse[49m[43m)[49m
+[0;32m    441[0m     response[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_unwrap_value(response[38;5;241m.[39mget([38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m))
+[0;32m    442[0m     [38;5;28;01mreturn[39;00m response
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\errorhandler.py:245[0m, in [0;36mErrorHandler.check_response[1;34m(self, response)[0m
+[0;32m    243[0m         alert_text [38;5;241m=[39m value[[38;5;124m"[39m[38;5;124malert[39m[38;5;124m"[39m][38;5;241m.[39mget([38;5;124m"[39m[38;5;124mtext[39m[38;5;124m"[39m)
+[0;32m    244[0m     [38;5;28;01mraise[39;00m exception_class(message, screen, stacktrace, alert_text)  [38;5;66;03m# type: ignore[call-arg]  # mypy is not smart enough here[39;00m
+[1;32m--> 245[0m [38;5;28;01mraise[39;00m exception_class(message, screen, stacktrace)
+
+[1;31mNoSuchElementException[0m: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="select_ambito"]"}
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x004FDCE3+50899]
+	(No symbol) [0x0048E111]
+	(No symbol) [0x00395588]
+	(No symbol) [0x003C08F9]
+	(No symbol) [0x003C0AFB]
+	(No symbol) [0x003EF902]
+	(No symbol) [0x003DB944]
+	(No symbol) [0x003EE01C]
+	(No symbol) [0x003DB6F6]
+	(No symbol) [0x003B7708]
+	(No symbol) [0x003B886D]
+	GetHandleVerifier [0x00763EAE+2566302]
+	GetHandleVerifier [0x007992B1+2784417]
+	GetHandleVerifier [0x0079327C+2759788]
+	GetHandleVerifier [0x00595740+672048]
+	(No symbol) [0x00498872]
+	(No symbol) [0x004941C8]
+	(No symbol) [0x004942AB]
+	(No symbol) [0x004871B7]
+	BaseThreadInitThunk [0x75D07D69+25]
+	RtlInitializeExceptionChain [0x7725B74B+107]
+	RtlClearBits [0x7725B6CF+191]
+
+NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="select_ambito"]"}
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x004FDCE3+50899]
+	(No symbol) [0x0048E111]
+	(No symbol) [0x00395588]
+	(No symbol) [0x003C08F9]
+	(No symbol) [0x003C0AFB]
+	(No symbol) [0x003EF902]
+	(No symbol) [0x003DB944]
+	(No symbol) [0x003EE01C]
+	(No symbol) [0x003DB6F6]
+	(No symbol) [0x003B7708]
+	(No symbol) [0x003B886D]
+	GetHandleVerifier [0x00763EAE+2566302]
+	GetHandleVerifier [0x007992B1+2784417]
+	GetHandleVerifier [0x0079327C+2759788]
+	GetHandleVerifier [0x00595740+672048]
+	(No symbol) [0x00498872]
+	(No symbol) [0x004941C8]
+	(No symbol) [0x004942AB]
+	(No symbol) [0x004871B7]
+	BaseThreadInitThunk [0x75D07D69+25]
+	RtlInitializeExceptionChain [0x7725B74B+107]
+	RtlClearBits [0x7725B6CF+191]
+
+

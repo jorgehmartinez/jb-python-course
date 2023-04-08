@@ -1,0 +1,2212 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12. Causal Inference &#8212; Python Intensive Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python_notebooks/intermediate/Lecture_12';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="11. Folium" href="Lecture_11.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Python Intensive Course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic level</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_1.html">1. Github Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_2.html">2. Introduction to Python: Tuples, Lists, Dictionaries, Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_3.html">3. Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_4.html">4. If and Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_5.html">5. Functions and Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/Lecture_6.html">6. Inheritance, Private Variables, Fixed attributes, Costumize Exceptions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intermediate level</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lecture_7.html">7. Web Scraping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_8.html">8. API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_9.html">9. Visualization: Seaborn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_10.html">10. Geopandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_11.html">11. Folium</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12.  Causal Inference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jorgehmartinez/jb-python-course/blob/main/python_notebooks/intermediate/Lecture_12.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/jorgehmartinez/jb-python-course" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/python_notebooks/intermediate/Lecture_12.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>12.  Causal Inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-challenging-to-identify-causal-effect-correlation-is-not-causation">1. The challenging to identify causal effect: correlation is not causation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confunding-bias-treatment-and-the-outcome-shares-a-common-cause">Confunding bias: treatment and the outcome shares a common cause</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collider-bias-treatment-and-the-outcome-shares-a-common-effects">Collider bias: treatment and the outcome shares a common effects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potencial-outcomes-y-i-1-y-i-0">2. Potencial outcomes <span class="math notranslate nohighlight">\(Y_i^1 \ \ Y_i^0  \)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-treatment-effect">2.1 Average treatment effect</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-estiamte-ate">How estiamte ATE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independece-asumption">2.1.1 Independece Asumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sutva-asumption-stable-unit-treatment-value-assumption">2.1.2 SUTVA asumption ( stable unit treatment value assumption)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-control-trails-rct">2.2 Random Control Trails (RCT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-and-external-validity">2.3 Internal and external validity:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-test">3 A/B test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-test-application">A/B test application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Causal inference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">A/B test</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="causal-inference">
+<h1>12.  Causal Inference<a class="headerlink" href="#causal-inference" title="Permalink to this headline">#</a></h1>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">chardet</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">graphviz</span> <span class="k">as</span> <span class="nn">gr</span>
+
+<span class="kn">import</span> <span class="nn">pickle</span> 
+<span class="kn">import</span> <span class="nn">econml</span>   <span class="c1">## install package using cmd </span>
+<span class="kn">import</span> <span class="nn">dowhy</span>    <span class="c1">## install using cmd </span>
+<span class="kn">from</span> <span class="nn">dowhy</span> <span class="kn">import</span> <span class="n">CausalModel</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span> 
+
+<span class="kn">import</span> <span class="nn">statistics</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">shapiro</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">mannwhitneyu</span><span class="p">,</span> <span class="n">ks_2samp</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">ConvergenceWarning</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">econtools.metrics</span> <span class="k">as</span> <span class="nn">mt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Causal inference is the leveraging of theory and deep knowledge of institutional details to estimate the impact of events and choices on a given outcome of interest. In the field of economics, we find data from experimental studies or observational data. Each of them presents its own challenges to estimate unbiased causal effect.</p>
+<div class="section" id="the-challenging-to-identify-causal-effect-correlation-is-not-causation">
+<h2>1. The challenging to identify causal effect: correlation is not causation<a class="headerlink" href="#the-challenging-to-identify-causal-effect-correlation-is-not-causation" title="Permalink to this headline">#</a></h2>
+<div class="section" id="confunding-bias-treatment-and-the-outcome-shares-a-common-cause">
+<h3>Confunding bias: treatment and the outcome shares a common cause<a class="headerlink" href="#confunding-bias-treatment-and-the-outcome-shares-a-common-cause" title="Permalink to this headline">#</a></h3>
+<p>Take the following example, since the beginning of the last century there has been much debate about the cause of the sustained increase in lung cancer. Initial data indicated that there was a statistical association between smoking and lung cancer. But ¿how test that causal hypothesis?. Even more so if some doctors argued that genetic factors affects smoking as well as lung cancer independently.This is presented in the following Directed Acyclic Graphs:</p>
+<p>Change in genetic factors alters the probability of smoking and, at the same time, the development of cancer. In this way, the relationship between smoking and developing lung cancer would be a spurious correlation or non-causal correlation.</p>
+<p>The genetic factor variable is called a confounder because. Confounder varaible opens a backdoor-path that creates a non-causal correlation between variables. If the confounding variables are not taken into account, the estimated causal effect will be biased due to the omission of variables. Confounder variables can be observable or unobservable as in the example. The case of an observable confounder would be the education of the parents in the relationship between years of education and labor income.</p>
+<p><span class="math notranslate nohighlight">\( Smoking \rightarrow Lung \ \ Cancer\)</span> Directed causal effect</p>
+<p><span class="math notranslate nohighlight">\( Genetic \ \ factors \rightarrow  Smoking \rightarrow Lung \ \ Cancer\)</span> Backdoor-path indirected causal effect</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetic Factor&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">),</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetic Factor&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">),</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/81891fcc5591f45f309934c1feb2bc88f570f3620aad2d79c6cff299d9f9cea2.svg" src="../../_images/81891fcc5591f45f309934c1feb2bc88f570f3620aad2d79c6cff299d9f9cea2.svg" /></div>
+</div>
+</div>
+<div class="section" id="collider-bias-treatment-and-the-outcome-shares-a-common-effects">
+<h3>Collider bias: treatment and the outcome shares a common effects<a class="headerlink" href="#collider-bias-treatment-and-the-outcome-shares-a-common-effects" title="Permalink to this headline">#</a></h3>
+<p>Imagine that with the help of some miracle you are finally able to randomize education in order to measure its effect on wage. But just to be sure you won’t have confounding, you control for a lot of variables, one of them investment. But investment is a common effect that it’s called collider.  By conditioning on investment, you are opening a second path between the treatment and the outcome, which will make bias causal effect.</p>
+<p><span class="math notranslate nohighlight">\( Education \rightarrow Labor \ \ Income\)</span> Directed causal effect</p>
+<p><span class="math notranslate nohighlight">\( Education \rightarrow  Investment \ ; \ Labor \ \ income \rightarrow Investment \)</span> Backdoor-path indirected causal effect</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Educ&quot;</span><span class="p">,</span> <span class="s2">&quot;Investments&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Educ&quot;</span><span class="p">,</span> <span class="s2">&quot;Wage&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Wage&quot;</span><span class="p">,</span> <span class="s2">&quot;Investments&quot;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7bfb0d3104eab6f5d1f5e672d8ea120090c9058990e588ed588d2192caebb3d5.svg" src="../../_images/7bfb0d3104eab6f5d1f5e672d8ea120090c9058990e588ed588d2192caebb3d5.svg" /></div>
+</div>
+</div>
+</div>
+<div class="section" id="potencial-outcomes-y-i-1-y-i-0">
+<h2>2. Potencial outcomes <span class="math notranslate nohighlight">\(Y_i^1 \ \ Y_i^0  \)</span><a class="headerlink" href="#potencial-outcomes-y-i-1-y-i-0" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(D_i\)</span> is a binary variable that takes on a value of 1 if a particular unit i  receives the treatment and a 0 if it does not. Each unit will have two potential outcomes, but only one observed outcome. Potential outcomes are defined as <span class="math notranslate nohighlight">\(Y_i^1\)</span>  if unit   received the treatment and as <span class="math notranslate nohighlight">\(Y_i^0\)</span>  if the unit did not.</p>
+<p>A unit’s observable outcome is a function of its potential outcomes determined according to the switching equation</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = Y_i^1 + (1-D_i)*Y_i^0 \]</div>
+<p>The unit-specific treatment effect as the difference between the two states of the world:</p>
+<div class="math notranslate nohighlight">
+\[ \delta_i = Y_i^1 - Y_i^0 \]</div>
+<p>This requires knowing two states of the world, but we observe only one. Hence, we cannot calculate the unit treatment effect: “counterfactual problem”.</p>
+</div>
+<div class="section" id="average-treatment-effect">
+<h2>2.1 Average treatment effect<a class="headerlink" href="#average-treatment-effect" title="Permalink to this headline">#</a></h2>
+<p>Difference on population expected means in two states of the world.</p>
+<div class="math notranslate nohighlight">
+\[ ATE = E[\delta_i] = E[Y_i^1] - E[Y_i^0] \]</div>
+<p>We have to estimate ATE because we just one state if the world. We need to find a valid counterfactual.</p>
+<div class="section" id="how-estiamte-ate">
+<h3>How estiamte ATE<a class="headerlink" href="#how-estiamte-ate" title="Permalink to this headline">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ ATE = E[Y^1_i | T =1 ] - E[Y^0_i | T =0 ]\]</div>
+<div class="math notranslate nohighlight">
+\[ ATE = ( E[Y^1_i | T =1 ]  - E[Y^0_i | T =1 ] ) + E[Y^0_i | T =1 ]-  E[Y^0_i | T =0 ]  \]</div>
+<div class="math notranslate nohighlight">
+\[ ATE = ATET + E[Y^0_i | T =1 ]-  E[Y^0_i | T =0 ] = ATET + (selection \ \ bias)  \]</div>
+</div>
+<div class="section" id="independece-asumption">
+<h3>2.1.1 Independece Asumption<a class="headerlink" href="#independece-asumption" title="Permalink to this headline">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ (Y^1,Y^0) \ \ | \ \ T \]</div>
+<p>Potencial outcome are not correlated to treatment. This eliminates selection bias. In other word, treated and untreated unites are comparable.</p>
+</div>
+<div class="section" id="sutva-asumption-stable-unit-treatment-value-assumption">
+<h3>2.1.2 SUTVA asumption ( stable unit treatment value assumption)<a class="headerlink" href="#sutva-asumption-stable-unit-treatment-value-assumption" title="Permalink to this headline">#</a></h3>
+<p>It implies two things: the treatment is homogeneous between the treated units and there is no spillobes effect. That is, there are no untreated units that receive treatment</p>
+</div>
+</div>
+<div class="section" id="random-control-trails-rct">
+<h2>2.2 Random Control Trails (RCT)<a class="headerlink" href="#random-control-trails-rct" title="Permalink to this headline">#</a></h2>
+<p>Randomised Experiments. Randomised experiments consist of randomly assigning individuals in a population to a treatment or to a control group.</p>
+<p>Randomisation annihilates bias by making the potential outcomes independent of the treatment. Both groups are comparable into observable and non-observable variables.</p>
+<div class="math notranslate nohighlight">
+\[ ATE = ATET + (selection \ \ bias) = ATET \]</div>
+</div>
+<div class="section" id="internal-and-external-validity">
+<h2>2.3 Internal and external validity:<a class="headerlink" href="#internal-and-external-validity" title="Permalink to this headline">#</a></h2>
+<p>Random selection keeps características from population (external validity).
+In a similar way, RCT keeps treatment and control group caracteristics (internal validity). Once treatment, both groups are affected by same external factors. Treatment is the unique difference in both groups. RCT overcome selection bias: accurate estimate of contrafactual.</p>
+<p>External validity let to extrapolate or generalized conclusion from sample evaluation to la población de unidades elegibles or targeret popultaion.</p>
+</div>
+<div class="section" id="a-b-test">
+<h2>3 A/B test<a class="headerlink" href="#a-b-test" title="Permalink to this headline">#</a></h2>
+<p>Randomized experimentation process where in two or more versions of a variable (web page, page element, etc.) are shown to different segments of website visitors at the same time to determine which version leaves the maximum impact and drive business metrics.</p>
+</div>
+<div class="section" id="a-b-test-application">
+<h2>A/B test application<a class="headerlink" href="#a-b-test-application" title="Permalink to this headline">#</a></h2>
+<p>An ecommerce company used the following strategy: assign discount benefits on online purchases to its customers randomly. The notice of benefits will appear in the user’s virtual account. This strategy is applied for one year.</p>
+<p>The objective of the work is to evaluate the causal effect of the marketing strategy. Does the strategy manage to increase sales? Does the marketing strategy increase sales in a sustained manner?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uplaoad base from marketing strategies </span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;../_data/ABtest/abtest.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">det</span> <span class="o">=</span> <span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+<span class="n">charenc</span> <span class="o">=</span> <span class="n">det</span><span class="p">[</span><span class="s1">&#39;encoding&#39;</span><span class="p">]</span>
+
+<span class="n">base1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="sa">r</span><span class="s1">&#39;../_data/ABtest/abtest.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">charenc</span><span class="p">)</span>
+<span class="n">base1</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>signup_month</th>
+      <th>month</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>8</td>
+      <td>1</td>
+      <td>511</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+      <td>471</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>8</td>
+      <td>3</td>
+      <td>465</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>4</td>
+      <td>479</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>8</td>
+      <td>5</td>
+      <td>429</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>119995</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>8</td>
+      <td>399</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119996</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>9</td>
+      <td>488</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119997</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>10</td>
+      <td>524</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119998</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>11</td>
+      <td>494</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119999</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>12</td>
+      <td>509</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>120000 rows × 5 columns</p>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>signup_month</th>
+      <th>month</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>8</td>
+      <td>1</td>
+      <td>511</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+      <td>471</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>8</td>
+      <td>3</td>
+      <td>465</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>4</td>
+      <td>479</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>8</td>
+      <td>5</td>
+      <td>429</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>119995</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>8</td>
+      <td>399</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119996</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>9</td>
+      <td>488</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119997</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>10</td>
+      <td>524</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119998</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>11</td>
+      <td>494</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>119999</th>
+      <td>9999</td>
+      <td>8</td>
+      <td>12</td>
+      <td>509</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>120000 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="n">base1</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="kc">True</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+<span class="n">base</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>user_id         int64
+signup_month    int64
+month           int64
+spend           int64
+treatment       int64
+dtype: object
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>user_id         int64
+signup_month    int64
+month           int64
+spend           int64
+treatment       int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The function and bucle allows to identify the benefits per month and accumulated sales. </span>
+
+<span class="k">def</span> <span class="nf">causal_signup_month</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">a</span><span class="p">[(</span><span class="n">a</span><span class="o">.</span><span class="n">signup_month</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">signup_month</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">month</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">month</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;user_id&#39;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;spend&#39;</span><span class="p">,</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+        <span class="nb">globals</span><span class="p">()[</span><span class="sa">f</span><span class="s1">&#39;base_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">causal_signup_month</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># total sales under two months of treatment for the beneficiary clients on (February)</span>
+<span class="c1"># sales under treatment (February and march)</span>
+
+<span class="n">base_2_2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>926</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>922</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1010</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>958</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>945</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5458</th>
+      <td>9990</td>
+      <td>999</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5459</th>
+      <td>9992</td>
+      <td>918</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5460</th>
+      <td>9995</td>
+      <td>940</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5461</th>
+      <td>9996</td>
+      <td>992</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5462</th>
+      <td>9998</td>
+      <td>963</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5463 rows × 3 columns</p>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>926</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>922</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1010</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>958</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>945</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5458</th>
+      <td>9990</td>
+      <td>999</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5459</th>
+      <td>9992</td>
+      <td>918</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5460</th>
+      <td>9995</td>
+      <td>940</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5461</th>
+      <td>9996</td>
+      <td>992</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5462</th>
+      <td>9998</td>
+      <td>963</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5463 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># total sales under three months of treatment for the beneficiary clients on June</span>
+<span class="c1"># months under treatment (June, July and August)</span>
+
+<span class="n">base_6_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1296</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1296</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>1285</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>1500</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>1311</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5472</th>
+      <td>9993</td>
+      <td>1589</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5473</th>
+      <td>9995</td>
+      <td>1241</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5474</th>
+      <td>9996</td>
+      <td>1308</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5475</th>
+      <td>9997</td>
+      <td>1504</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5476</th>
+      <td>9998</td>
+      <td>1253</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5477 rows × 3 columns</p>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1296</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1296</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>1285</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>1500</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>1311</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5472</th>
+      <td>9993</td>
+      <td>1589</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5473</th>
+      <td>9995</td>
+      <td>1241</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5474</th>
+      <td>9996</td>
+      <td>1308</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5475</th>
+      <td>9997</td>
+      <td>1504</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>5476</th>
+      <td>9998</td>
+      <td>1253</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5477 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kolmorogov - Smirnov Test: independent sample from common population distribution f(X)</span>
+
+<span class="n">ks_2samp</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># H0: samples come from same population distribution</span>
+<span class="c1"># Pvalues is less than 5%, therefore the null hypothesis that both samples come from the same distribution is rejected.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KstestResult(statistic=0.8733908806150343, pvalue=8.7e-322, statistic_location=997, statistic_sign=-1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KstestResult(statistic=0.8733908806150343, pvalue=8.7e-322, statistic_location=997, statistic_sign=-1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_1</span> <span class="o">=</span> <span class="n">base_2_2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;treatment&quot;</span><span class="p">)[</span><span class="s1">&#39;spend&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;count&quot;</span><span class="p">,</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span><span class="s2">&quot;std&quot;</span><span class="p">,</span><span class="s2">&quot;median&quot;</span><span class="p">,</span><span class="s2">&quot;min&quot;</span><span class="p">,</span><span class="s2">&quot;max&quot;</span><span class="p">])</span>
+<span class="n">test_1</span> 
+
+<span class="c1"># Mean are different in both group</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>min</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>treatment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>5006</td>
+      <td>949.386536</td>
+      <td>32.057687</td>
+      <td>949.0</td>
+      <td>819</td>
+      <td>1058</td>
+    </tr>
+    <tr>
+      <th>1.0</th>
+      <td>457</td>
+      <td>1047.463895</td>
+      <td>32.159405</td>
+      <td>1047.0</td>
+      <td>961</td>
+      <td>1150</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>median</th>
+      <th>min</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>treatment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>5006</td>
+      <td>949.386536</td>
+      <td>32.057687</td>
+      <td>949.0</td>
+      <td>819</td>
+      <td>1058</td>
+    </tr>
+    <tr>
+      <th>1.0</th>
+      <td>457</td>
+      <td>1047.463895</td>
+      <td>32.159405</td>
+      <td>1047.0</td>
+      <td>961</td>
+      <td>1150</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatment Group&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control Group&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Different densities corroborated the first test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/537cc4a569b4b84684213593e30de04bf9f7fc7fa566ea6f43a948a8e79a3458.png" src="../../_images/537cc4a569b4b84684213593e30de04bf9f7fc7fa566ea6f43a948a8e79a3458.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">box</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;spend&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">base_2_2</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spending by user&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Acummulated annual spending&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">box</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;Control group&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment group&quot;</span><span class="p">]));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/be39f53f0e312569ee9a1ce7fa535dbb9950e803b119a414693d4ce3d9fc7fe2.png" src="../../_images/be39f53f0e312569ee9a1ce7fa535dbb9950e803b119a414693d4ce3d9fc7fe2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jb1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">jb2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jb1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jb2</span><span class="p">)</span>
+<span class="c1"># H0: samples come from Normal distribution</span>
+
+<span class="c1"># Pvalues is larger than 5%, even 10%,, therefore, the null hypothesis that the</span>
+<span class="c1"># samples were drawn from a normal distribution is not rejected.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SignificanceResult(statistic=1.0913765748896174, pvalue=0.5794428228359012)
+SignificanceResult(statistic=0.9621851872679125, pvalue=0.6181076822166733)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> 
+                                     <span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t_value = </span><span class="si">%.3f</span><span class="s1">, t_test_p = </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># H0: samples come from same population distribution</span>
+<span class="c1"># Non-parametric test that corroborates that both samples come from different distributions because p-vales is less 5%. </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t_value = 62.426, t_test_p = 0.000 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;statistics-t = </span><span class="si">%.3f</span><span class="s1">, P_value= </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># H0: mean(y)treatment = mean(y)control</span>
+<span class="c1">#  p-vales is less 5%, hence H0 is rejected. The average sales of both groups is statistically different.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>statistics-t = 2254562.000, P_value= 0.000 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;spend ~ treatment&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">base_2_2</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="c1"># For the beneficiaries of the month of February, the first two months undrer treatment increased sales by 98.07 dollars compared to the non-beneficiary group. </span>
+<span class="c1"># This result is statistically significant at the 95% confidence level.</span>
+<span class="c1"># the coefficient does not present important bias since the treatment and control groups are statistically comparable.</span>
+<span class="c1"># Hence, no bias due to omission of relevant variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  spend   R-squared:                       0.418
+Model:                            OLS   Adj. R-squared:                  0.418
+Method:                 Least Squares   F-statistic:                     3918.
+Date:                Fri, 07 Apr 2023   Prob (F-statistic):               0.00
+Time:                        22:25:25   Log-Likelihood:                -26695.
+No. Observations:                5463   AIC:                         5.339e+04
+Df Residuals:                    5461   BIC:                         5.341e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    949.3865      0.453   2094.793      0.000     948.498     950.275
+treatment     98.0774      1.567     62.591      0.000      95.005     101.149
+==============================================================================
+Omnibus:                        0.827   Durbin-Watson:                   1.984
+Prob(Omnibus):                  0.661   Jarque-Bera (JB):                0.780
+Skew:                           0.001   Prob(JB):                        0.677
+Kurtosis:                       3.059   Cond. No.                         3.64
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abtest</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Kolmorogov - Smirnov Test&quot;</span><span class="p">,</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span> <span class="o">=</span> <span class="n">ks_2samp</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">base</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t_value = </span><span class="si">%.3f</span><span class="s1">, t_test_p = </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Summary Statistics&quot;</span><span class="p">,</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">test_1</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;treatment&quot;</span><span class="p">)[</span><span class="s1">&#39;spend&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;count&quot;</span><span class="p">,</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span><span class="s2">&quot;std&quot;</span><span class="p">,</span><span class="s2">&quot;median&quot;</span><span class="p">,</span><span class="s2">&quot;min&quot;</span><span class="p">,</span><span class="s2">&quot;max&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">test_1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Jarque Bera Normality Test&quot;</span><span class="p">,</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">jb1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">jb2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jarque Bera (treatment group): </span><span class="si">{</span><span class="n">jb1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jarque Bera (control group):  </span><span class="si">{</span><span class="n">jb2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Mann Whitney U Non parametric - Test&quot;</span><span class="p">,</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;statistics-t = </span><span class="si">%.3f</span><span class="s1">, P_value= </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;T-test mean&quot;</span><span class="p">,</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> 
+                                     <span class="n">base</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t_value = </span><span class="si">%.3f</span><span class="s1">, t_test_p = </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_value</span><span class="p">,</span> <span class="n">t_test_p</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Densities Plot analysis&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatment Group&quot;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control Group&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Regression analysis&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;spend ~ treatment&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">base</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">(),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span><span class="s2">&quot;Pox Plot analysis&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;spend&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span> <span class="n">base</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Annual Spending by user&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Box per Annual spending&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">box</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;Control group&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment group&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abtest</span><span class="p">(</span><span class="n">base_2_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolmorogov - Smirnov Test 
+
+t_value = 0.873, t_test_p = 0.000 
+
+Summary Statistics 
+
+           count         mean        std  median  min   max
+treatment                                                  
+0.0         5006   949.386536  32.057687   949.0  819  1058
+1.0          457  1047.463895  32.159405  1047.0  961  1150 
+
+Jarque Bera Normality Test 
+
+Jarque Bera (treatment group): SignificanceResult(statistic=1.0913765748896174, pvalue=0.5794428228359012) 
+
+Jarque Bera (control group):  SignificanceResult(statistic=0.9621851872679125, pvalue=0.6181076822166733) 
+
+Mann Whitney U Non parametric - Test 
+
+statistics-t = 2254562.000, P_value= 0.000 
+
+T-test mean 
+
+t_value = 62.426, t_test_p = 0.000 
+
+Densities Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/4e7916c2b66749c030115ceb219a754ca6251162bace7449ace80a1e4d2399a4.png" src="../../_images/4e7916c2b66749c030115ceb219a754ca6251162bace7449ace80a1e4d2399a4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression analysis 
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  spend   R-squared:                       0.418
+Model:                            OLS   Adj. R-squared:                  0.418
+Method:                 Least Squares   F-statistic:                     3918.
+Date:                Fri, 07 Apr 2023   Prob (F-statistic):               0.00
+Time:                        22:25:30   Log-Likelihood:                -26695.
+No. Observations:                5463   AIC:                         5.339e+04
+Df Residuals:                    5461   BIC:                         5.341e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    949.3865      0.453   2094.793      0.000     948.498     950.275
+treatment     98.0774      1.567     62.591      0.000      95.005     101.149
+==============================================================================
+Omnibus:                        0.827   Durbin-Watson:                   1.984
+Prob(Omnibus):                  0.661   Jarque-Bera (JB):                0.780
+Skew:                           0.001   Prob(JB):                        0.677
+Kurtosis:                       3.059   Cond. No.                         3.64
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified. 
+
+Pox Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/a0b0d6b1b7350a516bfed9400b28dd36cd94826d0e0fa4baca94b5a69311ba25.png" src="../../_images/a0b0d6b1b7350a516bfed9400b28dd36cd94826d0e0fa4baca94b5a69311ba25.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Positive causal effect of the marketing strategy over time</span>
+
+<span class="n">coef</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;months&#39;</span><span class="p">,</span><span class="s1">&#39;causal_effect&#39;</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="s1">&#39;upper&#39;</span><span class="p">))</span>
+                    
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;spend ~ treatment&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="nb">globals</span><span class="p">()[</span><span class="sa">f</span><span class="s1">&#39;base_2_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">coef</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;lower&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coef</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;upper&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coef</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;causal_effect&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coef</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;months&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">j</span>
+
+<span class="n">coef</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>months</th>
+      <th>causal_effect</th>
+      <th>lower</th>
+      <th>upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>98.077359</td>
+      <td>95.005482</td>
+      <td>101.149236</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>198.97023</td>
+      <td>195.249432</td>
+      <td>202.691028</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>299.287842</td>
+      <td>295.014514</td>
+      <td>303.56117</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>400.08003</td>
+      <td>395.333792</td>
+      <td>404.826269</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>500.627491</td>
+      <td>495.414822</td>
+      <td>505.840161</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>602.782273</td>
+      <td>597.151287</td>
+      <td>608.413259</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8</td>
+      <td>703.938904</td>
+      <td>697.942304</td>
+      <td>709.935505</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9</td>
+      <td>805.135222</td>
+      <td>798.744774</td>
+      <td>811.525669</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>10</td>
+      <td>1005.810219</td>
+      <td>998.792173</td>
+      <td>1012.828265</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>11</td>
+      <td>1005.810219</td>
+      <td>998.792173</td>
+      <td>1012.828265</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>                             
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatment Group&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_2</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_2</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control Group&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2 months under treatmnet&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_6</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_6</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatment Group&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_6</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_6</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control Group&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;6 months under treatment&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_10</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_10</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatment Group&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span> <span class="n">base_2_10</span><span class="p">[</span><span class="s1">&#39;spend&#39;</span><span class="p">][</span><span class="n">base_2_10</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control Group&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;10 months under treatment&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="c1">#The densities show an increasing gap according to the months accumulated under the treatment.</span>
+    <span class="c1">#Treatment clients on february</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1f0445ac8e0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/3e42440b254493757b7575a80023e0e78e6daff4324785d996432c17b7915c09.png" src="../../_images/3e42440b254493757b7575a80023e0e78e6daff4324785d996432c17b7915c09.png" />
+<img alt="../../_images/8ad295d86c0c60cad8325843bfd89b744c66746f4a513def42a269ded73f4512.png" src="../../_images/8ad295d86c0c60cad8325843bfd89b744c66746f4a513def42a269ded73f4512.png" />
+<img alt="../../_images/48dd8473d3b6c3e3f14b088a251ac1c7689ad4db448e529a4cb9c83a531d2bca.png" src="../../_images/48dd8473d3b6c3e3f14b088a251ac1c7689ad4db448e529a4cb9c83a531d2bca.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_2_10</span> <span class="o">=</span> <span class="n">causal_signup_month</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># AB test for ten months under treatment for the beneficiary clients on February</span>
+<span class="n">abtest</span><span class="p">(</span><span class="n">base_2_10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolmorogov - Smirnov Test 
+
+t_value = 1.000, t_test_p = 0.000 
+
+Summary Statistics 
+
+           count         mean        std  median   min   max
+treatment                                                   
+0.0         5006  4728.382341  73.222369  4728.0  4456  4988
+1.0          457  5734.192560  73.657384  5737.0  5525  5970 
+
+Jarque Bera Normality Test 
+
+Jarque Bera (treatment group): SignificanceResult(statistic=0.4653152162176708, pvalue=0.7924248469227017) 
+
+Jarque Bera (control group):  SignificanceResult(statistic=0.6594857909581255, pvalue=0.7191085957374495) 
+
+Mann Whitney U Non parametric - Test 
+
+statistics-t = 2287742.000, P_value= 0.000 
+
+T-test mean 
+
+t_value = 279.577, t_test_p = 0.000 
+
+Densities Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/d77a3fde6028a1ff0d166b72fa88fdf70f4269cb752983ee6ececdf210fe3169.png" src="../../_images/d77a3fde6028a1ff0d166b72fa88fdf70f4269cb752983ee6ececdf210fe3169.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression analysis 
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  spend   R-squared:                       0.935
+Model:                            OLS   Adj. R-squared:                  0.935
+Method:                 Least Squares   F-statistic:                 7.894e+04
+Date:                Fri, 07 Apr 2023   Prob (F-statistic):               0.00
+Time:                        22:25:53   Log-Likelihood:                -31209.
+No. Observations:                5463   AIC:                         6.242e+04
+Df Residuals:                    5461   BIC:                         6.243e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept   4728.3823      1.035   4566.656      0.000    4726.353    4730.412
+treatment   1005.8102      3.580    280.960      0.000     998.792    1012.828
+==============================================================================
+Omnibus:                        0.918   Durbin-Watson:                   2.000
+Prob(Omnibus):                  0.632   Jarque-Bera (JB):                0.947
+Skew:                           0.003   Prob(JB):                        0.623
+Kurtosis:                       2.936   Cond. No.                         3.64
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified. 
+
+Pox Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/0352a0f6f687803a7a37a5c5d3faa5dc0677cbcb08a21d81548c5a0c49418bf5.png" src="../../_images/0352a0f6f687803a7a37a5c5d3faa5dc0677cbcb08a21d81548c5a0c49418bf5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Placebo Test: Treatment groups are artificially created from control group. </span>
+<span class="c1"># Beneficiary units are randomly selected from the control group</span>
+
+<span class="c1"># artificial beneficiary clients of february</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">pbo_base0</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="n">base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;treatment&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pbo_base1</span> <span class="o">=</span> <span class="n">pbo_base0</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">])</span>
+
+<span class="n">pbo_base1</span> <span class="o">=</span> <span class="n">pbo_base1</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">pbo_base1</span> <span class="o">=</span> <span class="n">pbo_base1</span><span class="p">[[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]]</span>
+<span class="n">pbo_base1</span><span class="p">[</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">placebo_base</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pbo_base0</span><span class="p">,</span> <span class="n">pbo_base1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">])</span>
+<span class="n">placebo_base</span><span class="p">[</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">placebo_base</span><span class="p">[</span><span class="s1">&#39;treatment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">placebo_base</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">placebo_base</span><span class="o">.</span><span class="n">treatment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;signup_month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+<span class="nb">globals</span><span class="p">()[</span><span class="sa">f</span><span class="s1">&#39;placebo_base_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">placebo_base</span>
+
+
+<span class="c1"># first two months under treatment for february artifical benficiaries</span>
+<span class="n">placebo_2_2</span> <span class="o">=</span> <span class="n">causal_signup_month</span><span class="p">(</span><span class="n">placebo_base_2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">placebo_base_2</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>signup_month</th>
+      <th>month</th>
+      <th>spend</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>60072.000000</td>
+      <td>60072.000000</td>
+      <td>60072.000000</td>
+      <td>60072.000000</td>
+      <td>60072.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>4972.272473</td>
+      <td>0.500200</td>
+      <td>6.500000</td>
+      <td>434.853443</td>
+      <td>0.250100</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2890.220110</td>
+      <td>0.866148</td>
+      <td>3.452081</td>
+      <td>41.062485</td>
+      <td>0.433074</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>286.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2448.000000</td>
+      <td>0.000000</td>
+      <td>3.750000</td>
+      <td>404.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5010.000000</td>
+      <td>0.000000</td>
+      <td>6.500000</td>
+      <td>435.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7475.000000</td>
+      <td>2.000000</td>
+      <td>9.250000</td>
+      <td>466.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>9998.000000</td>
+      <td>2.000000</td>
+      <td>12.000000</td>
+      <td>566.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Placebo test for artificial beneficiary group on february</span>
+
+<span class="n">abtest</span><span class="p">(</span><span class="n">placebo_2_2</span><span class="p">)</span>
+
+<span class="c1">#It can be seen that both groups are statistically equal. </span>
+<span class="c1"># There is no evidence that the artificial treatment group has increased their purchases.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kolmorogov - Smirnov Test 
+
+t_value = 0.019, t_test_p = 0.867 
+
+Summary Statistics 
+
+           count        mean        std  median  min   max
+treatment                                                 
+0.0         3754  949.257326  32.146578   949.5  819  1058
+1.0         1252  949.773962  31.799294   949.0  844  1048 
+
+Jarque Bera Normality Test 
+
+Jarque Bera (treatment group): SignificanceResult(statistic=0.8424322407805283, pvalue=0.6562482574525269) 
+
+Jarque Bera (control group):  SignificanceResult(statistic=2.533146164438528, pvalue=0.2817956595520864) 
+
+Mann Whitney U Non parametric - Test 
+
+statistics-t = 2371435.000, P_value= 0.628 
+
+T-test mean 
+
+t_value = 0.496, t_test_p = 0.620 
+
+Densities Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/1039a2401416ab48541551225d5a08ff2d38b8472f6bf9ee027a6767b283619a.png" src="../../_images/1039a2401416ab48541551225d5a08ff2d38b8472f6bf9ee027a6767b283619a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression analysis 
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  spend   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                 -0.000
+Method:                 Least Squares   F-statistic:                    0.2438
+Date:                Fri, 07 Apr 2023   Prob (F-statistic):              0.621
+Time:                        22:26:01   Log-Likelihood:                -24461.
+No. Observations:                5006   AIC:                         4.893e+04
+Df Residuals:                    5004   BIC:                         4.894e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    949.2573      0.523   1814.120      0.000     948.232     950.283
+treatment      0.5166      1.046      0.494      0.621      -1.535       2.568
+==============================================================================
+Omnibus:                        1.004   Durbin-Watson:                   1.996
+Prob(Omnibus):                  0.605   Jarque-Bera (JB):                0.957
+Skew:                          -0.010   Prob(JB):                        0.620
+Kurtosis:                       3.065   Cond. No.                         2.48
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified. 
+
+Pox Plot analysis 
+</pre></div>
+</div>
+<img alt="../../_images/5b18ca1bfe031a1db158ff0d05c4ae45b60e5b8a753e3630b29d3792e88dea84.png" src="../../_images/5b18ca1bfe031a1db158ff0d05c4ae45b60e5b8a753e3630b29d3792e88dea84.png" />
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="section" id="id1">
+<h3>Causal inference<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://towardsdatascience.com/causal-inference-962ae97cefda">https://towardsdatascience.com/causal-inference-962ae97cefda</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/a-practical-guide-to-a-b-tests-in-python-66666f5c3b02">https://towardsdatascience.com/a-practical-guide-to-a-b-tests-in-python-66666f5c3b02</a></p>
+<p><a class="reference external" href="https://mixtape.scunning.com/introduction.html">https://mixtape.scunning.com/introduction.html</a></p>
+<p><a class="reference external" href="https://theeffectbook.net/introduction.html">https://theeffectbook.net/introduction.html</a></p>
+</div>
+<div class="section" id="id2">
+<h3>A/B test<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://www.kaggle.com/babyoda/a-b-testing-in-practice">https://www.kaggle.com/babyoda/a-b-testing-in-practice</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/ab-testing-with-python-e5964dd66143">https://towardsdatascience.com/ab-testing-with-python-e5964dd66143</a></p>
+<p><a class="reference external" href="https://www.kaggle.com/ekrembayar/a-b-testing-step-by-step-hypothesis-testing">https://www.kaggle.com/ekrembayar/a-b-testing-step-by-step-hypothesis-testing</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "jorgehmartinez/jb-python-course",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python_notebooks\intermediate"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lecture_11.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">11. Folium</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-challenging-to-identify-causal-effect-correlation-is-not-causation">1. The challenging to identify causal effect: correlation is not causation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confunding-bias-treatment-and-the-outcome-shares-a-common-cause">Confunding bias: treatment and the outcome shares a common cause</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collider-bias-treatment-and-the-outcome-shares-a-common-effects">Collider bias: treatment and the outcome shares a common effects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potencial-outcomes-y-i-1-y-i-0">2. Potencial outcomes <span class="math notranslate nohighlight">\(Y_i^1 \ \ Y_i^0  \)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-treatment-effect">2.1 Average treatment effect</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-estiamte-ate">How estiamte ATE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independece-asumption">2.1.1 Independece Asumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sutva-asumption-stable-unit-treatment-value-assumption">2.1.2 SUTVA asumption ( stable unit treatment value assumption)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-control-trails-rct">2.2 Random Control Trails (RCT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-and-external-validity">2.3 Internal and external validity:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-test">3 A/B test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-test-application">A/B test application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Causal inference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">A/B test</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jorge Huanca Martinez
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -17,3 +17,4 @@ parts:
   - file: python_notebooks/intermediate/Lecture_10.ipynb
   - file: python_notebooks/intermediate/Lecture_11.ipynb
   - file: python_notebooks/intermediate/Lecture_12.ipynb
+  - file: python_notebooks/intermediate/Lecture_13.ipynb
