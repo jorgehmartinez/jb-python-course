@@ -25,14 +25,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-tuple1[0] = 15
+course_name = str_1 + str_2 + str_3
+course_name # concatenation of the strings 
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mTypeError[0m                                 Traceback (most recent call last)
-Cell [1;32mIn[52], line 1[0m
-[1;32m----> 1[0m [43mtuple1[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m [38;5;241m=[39m [38;5;241m15[39m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[17], line 1[0m
+[1;32m----> 1[0m course_name [38;5;241m=[39m [43mstr_1[49m [38;5;241m+[39m str_2 [38;5;241m+[39m str_3
+[0;32m      2[0m course_name [38;5;66;03m# concatenation of the strings [39;00m
 
-[1;31mTypeError[0m: 'tuple' object does not support item assignment
-TypeError: 'tuple' object does not support item assignment
+[1;31mNameError[0m: name 'str_1' is not defined
+NameError: name 'str_1' is not defined
 
