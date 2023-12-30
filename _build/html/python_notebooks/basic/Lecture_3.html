@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. If and Loops" href="Lecture_4.html" />
-    <link rel="prev" title="2. Introduction to Python: Tuples, Lists, Dictionaries, Arrays" href="Lecture_2.html" />
+    <link rel="prev" title="2. Introduction to Python: Lists, Tuples, Dictionaries, Arrays" href="Lecture_2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -157,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic level</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lecture_1.html">1. Github Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lecture_2.html">2. Introduction to Python: Tuples, Lists, Dictionaries, Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_2.html">2. Introduction to Python: Lists, Tuples, Dictionaries, Arrays</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Pandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_4.html">4. If and Loops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_5.html">5. Functions and Class</a></li>
@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_10.html">10. Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_11.html">11. Folium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_12.html">12.  Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_13.html">13. Natural Language Processing (NLP)</a></li>
 </ul>
 
     </div>
@@ -397,7 +398,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.3.2. Indexing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-methods">3.3.3. General Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-methods">3.3.3. General Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframe-operations">Pandas DataFrame  Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-duplicates-values">Working with duplicates values</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data">3.3.4. Importing Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">3.3.5. Filtering data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-nulls">3.3.6. Dealing with nulls</a></li>
@@ -611,13 +616,14 @@ dtype: int64
 <p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> do not need to be an integer. we can use <code class="docutils literal notranslate"><span class="pre">strings</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">claudia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">claudia</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates an array starting from 5 and stopping just before 21, incrementing by 3.</span>
+<span class="n">grades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">grades</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 5,  7,  9, 11, 13, 15, 17, 19])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 5,  8, 11, 14, 17, 20])
 </pre></div>
 </div>
 </div>
@@ -625,6 +631,7 @@ dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Creates a Pandas Series with the specified values and custom index labels</span>
 <span class="n">math</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">5.</span><span class="p">,</span><span class="mf">21.</span><span class="p">,</span><span class="mf">3.</span><span class="p">)</span> <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;joyce&#39;</span><span class="p">,</span><span class="s1">&#39;jeremy&#39;</span><span class="p">,</span><span class="s1">&#39;ivan&#39;</span><span class="p">,</span><span class="s1">&#39;marcy&#39;</span><span class="p">,</span><span class="s1">&#39;daniel&#39;</span><span class="p">,</span><span class="s1">&#39;franclin&#39;</span><span class="p">])</span>
 <span class="n">math</span>
 </pre></div>
@@ -638,31 +645,6 @@ marcy       14.0
 daniel      17.0
 franclin    20.0
 dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span> <span class="p">,</span> <span class="mi">15</span> <span class="p">,</span><span class="mf">3.</span><span class="p">)</span>
-<span class="n">index_info</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;joyce&#39;</span><span class="p">,</span><span class="s1">&#39;jeremy&#39;</span><span class="p">,</span><span class="s1">&#39;ivan&#39;</span><span class="p">,</span><span class="s1">&#39;marcy&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>  <span class="n">info</span> <span class="p">,</span> <span class="n">index_info</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">,</span>  <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Daniel&quot;</span><span class="p">)</span>
-<span class="n">math_2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>joyce      5
-jeremy     8
-ivan      11
-marcy     14
-Name: Daniel, dtype: int32
 </pre></div>
 </div>
 </div>
@@ -714,12 +696,14 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">data</span><span class="p">[</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">]</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print a subset of the data, including rows 1, 2, and 3 (index 1 to 3).</span>
+<span class="c1"># &quot;float64&quot; indicates that each floating-point number is represented using 64 bits of memory</span>
+<span class="n">data</span><span class="p">[</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">]</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    0.50
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    0.50
 2    0.75
 3    1.00
 dtype: float64
@@ -756,7 +740,6 @@ dtype: int64
 </tr>
 </tbody>
 </table>
-<p>Get the value of New York.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population</span>
@@ -774,6 +757,7 @@ dtype: int64
 </div>
 </div>
 </div>
+<p>Get the value of New York.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="s2">&quot;New York&quot;</span> <span class="p">]</span>
@@ -847,18 +831,6 @@ There are many different ways to initialize a DataFrame. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_A</span><span class="p">[</span><span class="s2">&quot;Art&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12, 16, 15, 19, 10]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_A</span>
 </pre></div>
 </div>
@@ -874,157 +846,21 @@ There are many different ways to initialize a DataFrame. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">grades_A</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_A</span><span class="p">[</span><span class="s2">&quot;Art&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12, 16, 15, 19, 10]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &quot;DataFrame()&quot; function from Pandas is used to create a DataFrame</span>
+<span class="n">gradesA1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">grades_A</span> <span class="p">)</span>
 <span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alejandro</td>
-      <td>15</td>
-      <td>13</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Pedro</td>
-      <td>16</td>
-      <td>9</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Ramiro</td>
-      <td>10</td>
-      <td>16</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Axel</td>
-      <td>12</td>
-      <td>14</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Juan</td>
-      <td>13</td>
-      <td>17</td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_A</span><span class="p">[</span><span class="s2">&quot;dataframe_stephy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_A</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;dataframe_stephy&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alejandro</td>
-      <td>15</td>
-      <td>13</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Pedro</td>
-      <td>16</td>
-      <td>9</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Ramiro</td>
-      <td>10</td>
-      <td>16</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Axel</td>
-      <td>12</td>
-      <td>14</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Juan</td>
-      <td>13</td>
-      <td>17</td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
 </pre></div>
 </div>
 </div>
@@ -1367,185 +1203,6 @@ There are many different ways to initialize a DataFrame. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span> <span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Students&quot;</span> <span class="p">,</span> <span class="s2">&quot;Math&quot;</span><span class="p">]</span> <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Students&quot;</span> <span class="p">,</span> <span class="s2">&quot;Math&quot;</span><span class="p">]</span> <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span> <span class="p">]</span>
 </pre></div>
 </div>
@@ -1583,77 +1240,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <th>1</th>
       <td>Daniel</td>
       <td>14</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
     </tr>
   </tbody>
 </table>
@@ -1920,24 +1506,76 @@ There are many different ways to initialize a DataFrame. <br></p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not `inplace` argument</span>
 <span class="n">dep1_sort</span> <span class="o">=</span> <span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">dep1_sort</span> <span class="o">=</span> <span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
 <span class="n">dep1_sort</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Not `inplace` argument</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">dep1_sort</span> <span class="o">=</span> <span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">dep1_sort</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">NameError</span>: name &#39;sort_values&#39; is not defined
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dep</th>
+      <th>year</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Lima</td>
+      <td>2000</td>
+      <td>1.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Piura</td>
+      <td>2001</td>
+      <td>1.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Cuzco</td>
+      <td>2001</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tumbes</td>
+      <td>2002</td>
+      <td>3.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ica</td>
+      <td>2002</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Puno</td>
+      <td>2003</td>
+      <td>3.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2156,394 +1794,6 @@ There are many different ways to initialize a DataFrame. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dep1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dep</th>
-      <th>year</th>
-      <th>pop</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Lima</td>
-      <td>2000</td>
-      <td>1.5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Piura</td>
-      <td>2001</td>
-      <td>1.7</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Tumbes</td>
-      <td>2002</td>
-      <td>3.6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cuzco</td>
-      <td>2001</td>
-      <td>2.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ica</td>
-      <td>2002</td>
-      <td>2.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Puno</td>
-      <td>2003</td>
-      <td>3.2</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dep1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dep</th>
-      <th>year</th>
-      <th>pop</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Lima</td>
-      <td>2000</td>
-      <td>1.5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Piura</td>
-      <td>2001</td>
-      <td>1.7</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Tumbes</td>
-      <td>2002</td>
-      <td>3.6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cuzco</td>
-      <td>2001</td>
-      <td>2.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ica</td>
-      <td>2002</td>
-      <td>2.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Puno</td>
-      <td>2003</td>
-      <td>3.2</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dep1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dep</th>
-      <th>year</th>
-      <th>pop</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Lima</td>
-      <td>2000</td>
-      <td>1.5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Piura</td>
-      <td>2001</td>
-      <td>1.7</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Tumbes</td>
-      <td>2002</td>
-      <td>3.6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cuzco</td>
-      <td>2001</td>
-      <td>2.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ica</td>
-      <td>2002</td>
-      <td>2.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Puno</td>
-      <td>2003</td>
-      <td>3.2</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deps</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;dep&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Lima&#39;</span><span class="p">,</span> <span class="s1">&#39;Piura&#39;</span><span class="p">,</span> <span class="s1">&#39;Tumbes&#39;</span><span class="p">,</span> <span class="s1">&#39;Cuzco&#39;</span><span class="p">,</span> <span class="s1">&#39;Ica&#39;</span><span class="p">,</span> <span class="s1">&#39;Puno&#39;</span><span class="p">],</span>
-        <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="mi">2003</span> <span class="p">],</span>
-        <span class="s1">&#39;pop&#39;</span> <span class="p">:</span> <span class="p">[</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mf">3.2</span> <span class="p">]</span> 
-        <span class="p">}</span>
-<span class="n">dep1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">deps</span> <span class="p">)</span>
-<span class="n">dep1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dep</th>
-      <th>year</th>
-      <th>pop</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Lima</td>
-      <td>2000</td>
-      <td>1.5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Piura</td>
-      <td>2001</td>
-      <td>1.7</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Tumbes</td>
-      <td>2002</td>
-      <td>3.6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cuzco</td>
-      <td>2001</td>
-      <td>2.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ica</td>
-      <td>2002</td>
-      <td>2.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Puno</td>
-      <td>2003</td>
-      <td>3.2</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">suma</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> 
-    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> 
-    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dep2</span> <span class="o">=</span> <span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not `inplace` argument</span>
-<span class="n">dep1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
-<span class="n">dep1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dep</th>
-      <th>year</th>
-      <th>pop</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>5</th>
-      <td>Puno</td>
-      <td>2003</td>
-      <td>3.2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Tumbes</td>
-      <td>2002</td>
-      <td>3.6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Ica</td>
-      <td>2002</td>
-      <td>2.9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cuzco</td>
-      <td>2001</td>
-      <td>2.4</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Piura</td>
-      <td>2001</td>
-      <td>1.7</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Lima</td>
-      <td>2000</td>
-      <td>1.5</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Back to the original</span>
 <span class="n">dep1</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
 <span class="n">dep1</span>
@@ -2615,163 +1865,8 @@ There are many different ways to initialize a DataFrame. <br></p>
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;avg&#39;</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gradesA1</span><span class="p">[</span><span class="s2">&quot;Math&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;English&#39;</span> <span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;Art&#39;</span> <span class="p">]</span> <span class="p">)</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operations with DataFrame, new column</span>
-<span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;avg&#39;</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;Math&#39;</span> <span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;English&#39;</span> <span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;Art&#39;</span> <span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
-<span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
+<div class="section" id="pandas-dataframe-operations">
+<h4>Pandas DataFrame  Operations<a class="headerlink" href="#pandas-dataframe-operations" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
@@ -2801,8 +1896,80 @@ There are many different ways to initialize a DataFrame. <br></p>
       <th>Math</th>
       <th>English</th>
       <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gissela</td>
+      <td>16</td>
+      <td>16</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operations with DataFrame, new column</span>
+<span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;Avg&#39;</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gradesA1</span><span class="p">[</span><span class="s2">&quot;Math&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;English&#39;</span> <span class="p">]</span> <span class="o">+</span> <span class="n">gradesA1</span><span class="p">[</span> <span class="s1">&#39;Art&#39;</span> <span class="p">]</span> <span class="p">)</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">gradesA1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
     </tr>
   </thead>
   <tbody>
@@ -2813,7 +1980,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <td>16</td>
       <td>11</td>
       <td>14.333333</td>
-      <td>14.333333</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2821,7 +1987,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <td>14</td>
       <td>17</td>
       <td>17</td>
-      <td>16.000000</td>
       <td>16.000000</td>
     </tr>
     <tr>
@@ -2831,7 +1996,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <td>19</td>
       <td>13</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2839,7 +2003,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <td>17</td>
       <td>18</td>
       <td>14</td>
-      <td>16.333333</td>
       <td>16.333333</td>
     </tr>
     <tr>
@@ -2849,7 +2012,6 @@ There are many different ways to initialize a DataFrame. <br></p>
       <td>15</td>
       <td>17</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
   </tbody>
 </table>
@@ -2857,16 +2019,17 @@ There are many different ways to initialize a DataFrame. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># selects columns from index 1 up to (but not including) index 4, so select &quot;Math&quot;, &quot;English&quot; &amp; &quot;Art&quot;</span>
+<span class="n">gradesA1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    13.5
-1    17.0
-2    16.0
-3    16.0
-4    16.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    14.333333
+1    16.000000
+2    16.333333
+3    16.333333
+4    16.333333
 dtype: float64
 </pre></div>
 </div>
@@ -2874,43 +2037,7 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean art &amp; English</span>
-<span class="n">gradesA1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    13.5
-1    17.0
-2    16.0
-3    16.0
-4    16.0
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean Math adn Art</span>
-<span class="n">gradesA1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    13.5
-1    15.5
-2    15.0
-3    15.5
-4    17.0
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># head</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># head: display the first rows of the DataFrame </span>
 <span class="n">gradesA1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2938,8 +2065,7 @@ dtype: float64
       <th>Math</th>
       <th>English</th>
       <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
+      <th>Avg</th>
     </tr>
   </thead>
   <tbody>
@@ -2950,7 +2076,6 @@ dtype: float64
       <td>16</td>
       <td>11</td>
       <td>14.333333</td>
-      <td>14.333333</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2958,7 +2083,6 @@ dtype: float64
       <td>14</td>
       <td>17</td>
       <td>17</td>
-      <td>16.000000</td>
       <td>16.000000</td>
     </tr>
     <tr>
@@ -2968,7 +2092,6 @@ dtype: float64
       <td>19</td>
       <td>13</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
   </tbody>
 </table>
@@ -2976,163 +2099,9 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="p">[</span> <span class="s1">&#39;avg&#39;</span> <span class="p">,</span> <span class="s1">&#39;Art&#39;</span> <span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>avg_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop column</span>
-<span class="c1"># Always use copy when you want to modify your DataFrame</span>
-<span class="n">gradesA1_1</span> <span class="o">=</span> <span class="n">gradesA1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="p">[</span> <span class="s1">&#39;avg&#39;</span> <span class="p">,</span> <span class="s1">&#39;Art&#39;</span> <span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop: eliminate specific columns from the DataFrame</span>
+<span class="c1"># always use copy when you want to modify your DataFrame</span>
+<span class="n">gradesA1_1</span> <span class="o">=</span> <span class="n">gradesA1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="p">[</span> <span class="s1">&#39;Avg&#39;</span> <span class="p">,</span> <span class="s1">&#39;Art&#39;</span> <span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
 <span class="n">gradesA1_1</span>
 </pre></div>
 </div>
@@ -3159,7 +2128,6 @@ dtype: float64
       <th>Students</th>
       <th>Math</th>
       <th>English</th>
-      <th>avg_2</th>
     </tr>
   </thead>
   <tbody>
@@ -3168,35 +2136,30 @@ dtype: float64
       <td>Gissela</td>
       <td>16</td>
       <td>16</td>
-      <td>14.333333</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Daniel</td>
       <td>14</td>
       <td>17</td>
-      <td>16.000000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Andres</td>
       <td>17</td>
       <td>19</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Sandra</td>
       <td>17</td>
       <td>18</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Rosalyn</td>
       <td>17</td>
       <td>15</td>
-      <td>16.333333</td>
     </tr>
   </tbody>
 </table>
@@ -3204,98 +2167,7 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># gradesA1_1 = gradesA1.drop( [ &#39;avg&#39; , &#39;Art&#39; ], axis = 1 )</span>
-<span class="c1"># gradesA1_1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add new data gradesA2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add new data gradesA2</span>
 <span class="n">students</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Rebeca&quot;</span><span class="p">,</span> <span class="s2">&quot;Xavi&quot;</span><span class="p">,</span> <span class="s2">&quot;Cristiano&quot;</span><span class="p">,</span> <span class="s2">&quot;Ronaldo&quot;</span><span class="p">,</span> <span class="s2">&quot;Leo&quot;</span> <span class="p">]</span>
 <span class="n">math</span>     <span class="o">=</span> <span class="p">[</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span> <span class="p">]</span>
 <span class="n">english</span>  <span class="o">=</span> <span class="p">[</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span> <span class="p">]</span>
@@ -3304,24 +2176,7 @@ dtype: float64
 <span class="c1"># Dictionary</span>
 <span class="n">grades_A2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Students&#39;</span><span class="p">:</span><span class="n">students</span><span class="p">,</span> <span class="s1">&#39;Math&#39;</span><span class="p">:</span><span class="n">math</span><span class="p">,</span> <span class="s1">&#39;English&#39;</span><span class="p">:</span><span class="n">english</span><span class="p">,</span> <span class="s1">&#39;Art&#39;</span><span class="p">:</span><span class="n">art</span><span class="p">}</span>
 <span class="n">gradesA2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">grades_A2</span> <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">gradesA2</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English  Art
-0     Rebeca    15       18   10
-1       Xavi    18        9   16
-2  Cristiano    14       11   20
-3    Ronaldo     7       12   19
-4        Leo    10       20    5 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradesA2</span>
+<span class="n">gradesA2</span>
 </pre></div>
 </div>
 </div>
@@ -3419,8 +2274,7 @@ dtype: float64
       <th>Math</th>
       <th>English</th>
       <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
+      <th>Avg</th>
     </tr>
   </thead>
   <tbody>
@@ -3431,7 +2285,6 @@ dtype: float64
       <td>16</td>
       <td>11</td>
       <td>14.333333</td>
-      <td>14.333333</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3439,7 +2292,6 @@ dtype: float64
       <td>14</td>
       <td>17</td>
       <td>17</td>
-      <td>16.000000</td>
       <td>16.000000</td>
     </tr>
     <tr>
@@ -3449,7 +2301,6 @@ dtype: float64
       <td>19</td>
       <td>13</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3457,7 +2308,6 @@ dtype: float64
       <td>17</td>
       <td>18</td>
       <td>14</td>
-      <td>16.333333</td>
       <td>16.333333</td>
     </tr>
     <tr>
@@ -3467,7 +2317,6 @@ dtype: float64
       <td>15</td>
       <td>17</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
   </tbody>
 </table>
@@ -3475,13 +2324,14 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span> <span class="o">=</span>  <span class="n">gradesA1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">gradesA2</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># append: attach the rows of gradesA2 to the end of gradesA1, creating a new DataFrame</span>
+<span class="n">grades_total</span> <span class="o">=</span>  <span class="n">gradesA1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">gradesA2</span> <span class="p">)</span>
 <span class="n">grades_total</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_12852/742357978.py:1: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\jorge\AppData\Local\Temp\ipykernel_9220\4030817098.py:2: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
   grades_total =  gradesA1.append( gradesA2 )
 </pre></div>
 </div>
@@ -3507,8 +2357,7 @@ dtype: float64
       <th>Math</th>
       <th>English</th>
       <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
+      <th>Avg</th>
     </tr>
   </thead>
   <tbody>
@@ -3519,7 +2368,6 @@ dtype: float64
       <td>16</td>
       <td>11</td>
       <td>14.333333</td>
-      <td>14.333333</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3527,7 +2375,6 @@ dtype: float64
       <td>14</td>
       <td>17</td>
       <td>17</td>
-      <td>16.000000</td>
       <td>16.000000</td>
     </tr>
     <tr>
@@ -3537,7 +2384,6 @@ dtype: float64
       <td>19</td>
       <td>13</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3545,7 +2391,6 @@ dtype: float64
       <td>17</td>
       <td>18</td>
       <td>14</td>
-      <td>16.333333</td>
       <td>16.333333</td>
     </tr>
     <tr>
@@ -3555,7 +2400,6 @@ dtype: float64
       <td>15</td>
       <td>17</td>
       <td>16.333333</td>
-      <td>16.333333</td>
     </tr>
     <tr>
       <th>0</th>
@@ -3563,7 +2407,6 @@ dtype: float64
       <td>15</td>
       <td>18</td>
       <td>10</td>
-      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -3573,7 +2416,6 @@ dtype: float64
       <td>9</td>
       <td>16</td>
       <td>NaN</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3581,7 +2423,6 @@ dtype: float64
       <td>14</td>
       <td>11</td>
       <td>20</td>
-      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -3591,6 +2432,201 @@ dtype: float64
       <td>12</td>
       <td>19</td>
       <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Leo</td>
+      <td>10</td>
+      <td>20</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dropna: drops any row that contains at least one NaN value</span>
+<span class="n">grades_total</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gissela</td>
+      <td>16</td>
+      <td>16</td>
+      <td>11</td>
+      <td>14.333333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+      <td>16.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drops rows where the &quot;Art&quot; column has missing values (NaN)</span>
+<span class="n">grades_total</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="s2">&quot;Art&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gissela</td>
+      <td>16</td>
+      <td>16</td>
+      <td>11</td>
+      <td>14.333333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Rebeca</td>
+      <td>15</td>
+      <td>18</td>
+      <td>10</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Xavi</td>
+      <td>18</td>
+      <td>9</td>
+      <td>16</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cristiano</td>
+      <td>14</td>
+      <td>11</td>
+      <td>20</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ronaldo</td>
+      <td>7</td>
+      <td>12</td>
+      <td>19</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -3600,6 +2636,242 @@ dtype: float64
       <td>20</td>
       <td>5</td>
       <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fillna: fills any missing values (NaN) in the entire df with the specified value</span>
+<span class="n">grades_total</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;No value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gissela</td>
+      <td>16</td>
+      <td>16</td>
+      <td>11</td>
+      <td>14.333333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Rebeca</td>
+      <td>15</td>
+      <td>18</td>
+      <td>10</td>
+      <td>No value</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Xavi</td>
+      <td>18</td>
+      <td>9</td>
+      <td>16</td>
+      <td>No value</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cristiano</td>
+      <td>14</td>
+      <td>11</td>
+      <td>20</td>
+      <td>No value</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ronaldo</td>
+      <td>7</td>
+      <td>12</td>
+      <td>19</td>
+      <td>No value</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Leo</td>
+      <td>10</td>
+      <td>20</td>
+      <td>5</td>
+      <td>No value</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reset_index: resets the index of the df and drops the existing index</span>
+<span class="n">grades_total</span> <span class="o">=</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">grades_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gissela</td>
+      <td>16</td>
+      <td>16</td>
+      <td>11</td>
+      <td>14.333333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Rebeca</td>
+      <td>15</td>
+      <td>18</td>
+      <td>10</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Xavi</td>
+      <td>18</td>
+      <td>9</td>
+      <td>16</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Cristiano</td>
+      <td>14</td>
+      <td>11</td>
+      <td>20</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Ronaldo</td>
+      <td>7</td>
+      <td>12</td>
+      <td>19</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Leo</td>
+      <td>10</td>
+      <td>20</td>
+      <td>5</td>
       <td>NaN</td>
     </tr>
   </tbody>
@@ -3608,31 +2880,147 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>  <span class="o">=</span> <span class="n">gradesA1_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">gradesA2</span> <span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample: randomly selects n rows from the df</span>
+<span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English      avg_2   Art
-0    Gissela    16       16  14.333333   NaN
-1     Daniel    14       17  16.000000   NaN
-2     Andres    17       19  16.333333   NaN
-3     Sandra    17       18  16.333333   NaN
-4    Rosalyn    17       15  16.333333   NaN
-0     Rebeca    15       18        NaN  10.0
-1       Xavi    18        9        NaN  16.0
-2  Cristiano    14       11        NaN  20.0
-3    Ronaldo     7       12        NaN  19.0
-4        Leo    10       20        NaN   5.0
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Daniel</td>
+      <td>14</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Ronaldo</td>
+      <td>7</td>
+      <td>12</td>
+      <td>19</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample: randomly selects a fraction of rows from the df</span>
+<span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.6</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_12852/417608378.py:1: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  grades_total  = gradesA1_1.append( gradesA2 ).copy()
-</pre></div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Students</th>
+      <th>Math</th>
+      <th>English</th>
+      <th>Art</th>
+      <th>Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>Xavi</td>
+      <td>18</td>
+      <td>9</td>
+      <td>16</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rosalyn</td>
+      <td>17</td>
+      <td>15</td>
+      <td>17</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sandra</td>
+      <td>17</td>
+      <td>18</td>
+      <td>14</td>
+      <td>16.333333</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Leo</td>
+      <td>10</td>
+      <td>20</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Cristiano</td>
+      <td>14</td>
+      <td>11</td>
+      <td>20</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Andres</td>
+      <td>17</td>
+      <td>19</td>
+      <td>13</td>
+      <td>16.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
-</div>
+<div class="section" id="working-with-duplicates-values">
+<h4>Working with duplicates values<a class="headerlink" href="#working-with-duplicates-values" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cars</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -3810,1753 +3198,6 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span> <span class="o">=</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;avg_2&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dropna</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English   Art
-0    Gissela    16       16   NaN
-1     Daniel    14       17   NaN
-2     Andres    17       19   NaN
-3     Sandra    17       18   NaN
-4    Rosalyn    17       15   NaN
-0     Rebeca    15       18  10.0
-1       Xavi    18        9  16.0
-2  Cristiano    14       11  20.0
-3    Ronaldo     7       12  19.0
-4        Leo    10       20   5.0 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total_NA</span> <span class="o">=</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="s2">&quot;Art&quot;</span><span class="p">)</span>
-<span class="n">grades_total_NA</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">grades_total_NA</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English   Art
-0     Rebeca    15       18  10.0
-1       Xavi    18        9  16.0
-2  Cristiano    14       11  20.0
-3    Ronaldo     7       12  19.0
-4        Leo    10       20   5.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;no value&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>no value</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>no value</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>no value</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>no value</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>no value</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fillna</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-<span class="n">grades_total_fill_na</span> <span class="o">=</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span> <span class="s2">&quot;Na value&quot;</span> <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">grades_total_fill_na</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English   Art
-0    Gissela    16       16   NaN
-1     Daniel    14       17   NaN
-2     Andres    17       19   NaN
-3     Sandra    17       18   NaN
-4    Rosalyn    17       15   NaN
-0     Rebeca    15       18  10.0
-1       Xavi    18        9  16.0
-2  Cristiano    14       11  20.0
-3    Ronaldo     7       12  19.0
-4        Leo    10       20   5.0 
-
-    Students  Math  English       Art
-0    Gissela    16       16  Na value
-1     Daniel    14       17  Na value
-2     Andres    17       19  Na value
-3     Sandra    17       18  Na value
-4    Rosalyn    17       15  Na value
-0     Rebeca    15       18      10.0
-1       Xavi    18        9      16.0
-2  Cristiano    14       11      20.0
-3    Ronaldo     7       12      19.0
-4        Leo    10       20       5.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total_2</span> <span class="o">=</span>  <span class="n">gradesA1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">gradesA2</span> <span class="p">)</span>
-<span class="n">grades_total_2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_12852/4080899407.py:1: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  grades_total_2 =  gradesA1.append( gradesA2 )
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total_2</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="s2">&quot;avg_2&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-      <th>avg</th>
-      <th>avg_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>11</td>
-      <td>14.333333</td>
-      <td>14.333333</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>17</td>
-      <td>16.000000</td>
-      <td>16.000000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>13</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>14</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>17</td>
-      <td>16.333333</td>
-      <td>16.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reset_index()</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English   Art
-0    Gissela    16       16   NaN
-1     Daniel    14       17   NaN
-2     Andres    17       19   NaN
-3     Sandra    17       18   NaN
-4    Rosalyn    17       15   NaN
-0     Rebeca    15       18  10.0
-1       Xavi    18        9  16.0
-2  Cristiano    14       11  20.0
-3    Ronaldo     7       12  19.0
-4        Leo    10       20   5.0 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   index   Students  Math  English   Art
-0      0    Gissela    16       16   NaN
-1      1     Daniel    14       17   NaN
-2      2     Andres    17       19   NaN
-3      3     Sandra    17       18   NaN
-4      4    Rosalyn    17       15   NaN
-5      0     Rebeca    15       18  10.0
-6      1       Xavi    18        9  16.0
-7      2  Cristiano    14       11  20.0
-8      3    Ronaldo     7       12  19.0
-9      4        Leo    10       20   5.0 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
-                         <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_fill</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-                         <span class="n">allow_duplicates</span><span class="o">=</span><span class="n">_NoDefault</span><span class="o">.</span><span class="n">no_default</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index</th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>Gissela</td>
-      <td>16</td>
-      <td>16</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Daniel</td>
-      <td>14</td>
-      <td>17</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2</td>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>3</td>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>4</td>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   index   Students  Math  English   Art
-0      0    Gissela    16       16   NaN
-1      1     Daniel    14       17   NaN
-2      2     Andres    17       19   NaN
-3      3     Sandra    17       18   NaN
-4      4    Rosalyn    17       15   NaN
-5      0     Rebeca    15       18  10.0
-6      1       Xavi    18        9  16.0
-7      2  Cristiano    14       11  20.0
-8      3    Ronaldo     7       12  19.0
-9      4        Leo    10       20   5.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Students  Math  English   Art
-2  Cristiano    14       11  20.0
-0    Gissela    16       16   NaN
-3     Sandra    17       18   NaN
-2     Andres    17       19   NaN
-0     Rebeca    15       18  10.0 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.8</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Students</th>
-      <th>Math</th>
-      <th>English</th>
-      <th>Art</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>4</th>
-      <td>Rosalyn</td>
-      <td>17</td>
-      <td>15</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cristiano</td>
-      <td>14</td>
-      <td>11</td>
-      <td>20.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Ronaldo</td>
-      <td>7</td>
-      <td>12</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Xavi</td>
-      <td>18</td>
-      <td>9</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Leo</td>
-      <td>10</td>
-      <td>20</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Sandra</td>
-      <td>17</td>
-      <td>18</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Rebeca</td>
-      <td>15</td>
-      <td>18</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Andres</td>
-      <td>17</td>
-      <td>19</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">grades_total</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span> <span class="n">frac</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Students  Math  English   Art
-3   Sandra    17       18   NaN
-1     Xavi    18        9  16.0
-1   Daniel    14       17   NaN
-0  Gissela    16       16   NaN
-4  Rosalyn    17       15   NaN 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # reset_index</span>
-<span class="c1"># print( grades_total, &quot;\n&quot; )</span>
-<span class="c1"># print( grades_total.reset_index( drop = True ).shift( 1  ), &quot;\n&quot; )</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # unique</span>
-<span class="c1"># cars[&#39;brands&#39;].unique()</span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="importing-data">
@@ -5611,7 +3252,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;C:\\Users\\Anzony\\Documents\\GitHub\\Diplomado_PUCP\\Lecture_3&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;D:\\jorge\\Documents\\Github\\jb-python-course\\python_notebooks\\basic&#39;
 </pre></div>
 </div>
 </div>
@@ -5960,6 +3601,35 @@ dtype: float64
 <span class="k">with</span> <span class="n">sav</span><span class="o">.</span><span class="n">SavHeaderReader</span><span class="p">(</span> <span class="sa">r</span><span class="s2">&quot;../_data\enapres_2020_ch_100\736-Modulo1618\CAP_100_URBANO_RURAL_3.sav&quot;</span><span class="p">,</span> <span class="n">ioUtf8</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">header</span><span class="p">:</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="n">labels_enapres2020_1</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">valueLabels</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">63</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">enapres2020_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_spss</span><span class="p">(</span> <span class="sa">r</span><span class="s2">&quot;../_data\enapres_2020_ch_100\736-Modulo1618\CAP_100_URBANO_RURAL_3.sav&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Get labels from sav file</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># pip install savReaderWriter</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">savReaderWriter</span> <span class="k">as</span> <span class="nn">sav</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">with</span> <span class="n">sav</span><span class="o">.</span><span class="n">SavHeaderReader</span><span class="p">(</span> <span class="sa">r</span><span class="s2">&quot;../_data\enapres_2020_ch_100\736-Modulo1618\CAP_100_URBANO_RURAL_3.sav&quot;</span><span class="p">,</span> <span class="n">ioUtf8</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">header</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">metadata</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Python</span>\<span class="n">Python311</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">savReaderWriter</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">138</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="kn">from</span> <span class="nn">header</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span> <span class="kn">from</span> <span class="nn">savReader</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="ne">--&gt; </span><span class="mi">138</span> <span class="kn">from</span> <span class="nn">savWriter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="kn">from</span> <span class="nn">savHeaderReader</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="kn">from</span> <span class="nn">savReaderNp</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Python</span>\<span class="n">Python311</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">savReaderWriter</span>\<span class="n">savWriter</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">time</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">locale</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">pandasOK</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;Iterable&#39; from &#39;collections&#39; (C:\Python\Python311\Lib\collections\__init__.py)
 </pre></div>
 </div>
 </div>
@@ -12500,7 +10170,7 @@ new_data               DataFrame           PER  ANIO MES CONG&lt;...&gt;24347 ro
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">2. Introduction to Python: Tuples, Lists, Dictionaries, Arrays</p>
+        <p class="prev-next-title">2. Introduction to Python: Lists, Tuples, Dictionaries, Arrays</p>
       </div>
     </a>
     <a class="right-next"
@@ -12546,7 +10216,11 @@ new_data               DataFrame           PER  ANIO MES CONG&lt;...&gt;24347 ro
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.3.2. Indexing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-methods">3.3.3. General Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-methods">3.3.3. General Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframe-operations">Pandas DataFrame  Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-duplicates-values">Working with duplicates values</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data">3.3.4. Importing Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">3.3.5. Filtering data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-nulls">3.3.6. Dealing with nulls</a></li>

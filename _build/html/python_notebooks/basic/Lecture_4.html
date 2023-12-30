@@ -159,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic level</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lecture_1.html">1. Github Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lecture_2.html">2. Introduction to Python: Tuples, Lists, Dictionaries, Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lecture_2.html">2. Introduction to Python: Lists, Tuples, Dictionaries, Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_3.html">3. Pandas</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. If and Loops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lecture_5.html">5. Functions and Class</a></li>
@@ -173,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_10.html">10. Geopandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_11.html">11. Folium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_12.html">12.  Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/Lecture_13.html">13. Natural Language Processing (NLP)</a></li>
 </ul>
 
     </div>
@@ -488,13 +489,7 @@ if <font color='green'>test expresion</font>:<br>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">B</span> <span class="o">=</span> <span class="mi">30</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">==</span> <span class="n">B</span> 
+<span class="n">A</span> <span class="o">==</span> <span class="n">B</span> 
 </pre></div>
 </div>
 </div>
@@ -507,12 +502,12 @@ if <font color='green'>test expresion</font>:<br>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">A</span> <span class="o">==</span> <span class="n">B</span>
-<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39; Is A greater than B? </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># f&#39;&#39; help us to use numeric variables in strings</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39; Is A greater than B?: </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># f&#39;&#39; help us to use numeric variables in strings</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Is A greater than B? 	False
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Is A greater than B?: 	False
 </pre></div>
 </div>
 </div>
@@ -521,13 +516,7 @@ if <font color='green'>test expresion</font>:<br>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jose</span> <span class="o">=</span> <span class="mi">2017</span>
 <span class="n">bianca</span> <span class="o">=</span> <span class="mi">2018</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jose</span> <span class="o">==</span> <span class="n">bianca</span>
+<span class="n">jose</span> <span class="o">==</span> <span class="n">bianca</span>
 </pre></div>
 </div>
 </div>
@@ -567,22 +556,22 @@ if <font color='green'>test expresion</font>:<br>
 <span class="n">B</span> <span class="o">=</span> <span class="mi">2015</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">A</span> <span class="o">==</span> <span class="n">B</span>
-<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;result A == B </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;result A == B: </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">A</span> <span class="o">!=</span> <span class="n">B</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;result A != B </span><span class="se">\t</span><span class="s1">  </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;result A != B: </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&gt;</span> <span class="n">B</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;result A &gt; B </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;result A &gt; B: </span><span class="se">\t</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>result A == B 	False 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>result A == B: 	False
 
-result A != B 	  True 
+result A != B: 	True
 
-result A &gt; B 	 False 
+result A &gt; B: 	False
 </pre></div>
 </div>
 </div>
@@ -706,42 +695,7 @@ R execute <strong>Code2</strong> and will not test the next conditions. <br></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;String&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, 30, &#39;String&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">d</span>
-    <span class="k">return</span> <span class="n">n</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">c</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">d</span> <span class="o">=</span> <span class="mi">25</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A = 20</span>
-<span class="c1"># B = 30</span>
-<span class="c1"># C = 25</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">B</span><span class="o">&gt;</span> <span class="mi">30</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">B</span><span class="o">&gt;</span> <span class="mi">30</span><span class="p">):</span>
      <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;B is not equal to 30. Condition 1 is true.&#39;</span><span class="p">)</span>
         
 <span class="k">else</span><span class="p">:</span>
@@ -804,13 +758,7 @@ We have <strong><font color = 'red' >is</font></strong>, and <strong><font color
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+<span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
 </pre></div>
 </div>
 </div>
@@ -824,30 +772,14 @@ We have <strong><font color = 'red' >is</font></strong>, and <strong><font color
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">]</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3]
+[0 1 2 3]
 </pre></div>
 </div>
 </div>
@@ -860,30 +792,6 @@ We have <strong><font color = 'red' >is</font></strong>, and <strong><font color
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True,  True])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3])
 </pre></div>
 </div>
 </div>
@@ -925,11 +833,10 @@ else: <font color = 'red'> (Required) </font> <br>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">120</span>
 <span class="n">country</span> <span class="o">=</span> <span class="s2">&quot;AR&quot;</span>
-<span class="c1">#country = &quot;AR&quot;</span>
 
 <span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;PE&quot;</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shipping Cost is  $50&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shipping Cost is $50&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shipping Cost is $25&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="mi">150</span><span class="p">:</span>
@@ -982,8 +889,7 @@ For example, the <strong>isinstance</strong> function evaluates whether a variab
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#A = [15, &quot;Meir&quot;, True]</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 
 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span> <span class="n">A</span><span class="p">,</span> <span class="nb">str</span> <span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;A is a string&#39;</span> <span class="p">)</span>
@@ -1041,7 +947,6 @@ For example, the <strong>isinstance</strong> function evaluates whether a variab
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
-    <span class="c1">#print(i)</span>
     <span class="n">square</span> <span class="o">=</span> <span class="n">number</span><span class="o">**</span><span class="mi">2</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
 </pre></div>
@@ -1108,23 +1013,6 @@ For example, the <strong>isinstance</strong> function evaluates whether a variab
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_age</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">]]</span>
-
-<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">class_age</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="nb">type</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
-&lt;class &#39;list&#39;&gt;
-&lt;class &#39;list&#39;&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="p">:</span>
@@ -1138,6 +1026,23 @@ For example, the <strong>isinstance</strong> function evaluates whether a variab
 &lt;class &#39;int&#39;&gt;
 &lt;class &#39;int&#39;&gt;
 &lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_age</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">class_age</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="nb">type</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
+&lt;class &#39;list&#39;&gt;
+&lt;class &#39;list&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -1454,55 +1359,6 @@ age
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students</span><span class="o">!</span>!!
-<span class="mi">20</span><span class="o">**</span><span class="mi">20</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">63</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-    <span class="n">students</span><span class="o">!</span>!!
-            <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">class_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">element</span> <span class="o">+</span> <span class="s2">&quot;!!!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t!!!
-g!!!
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">class_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;!!!&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>students!!!
-[&#39;Miguel&#39;, &#39;Anthony&#39;, &#39;Paul&#39;, &#39;Rodrigo&#39;, &#39;Jason&#39;]
-age!!!
-[20, 18, 15, 20, 22]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_1</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1516,33 +1372,16 @@ age!!!
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">class_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">key_mod</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;!!!&quot;</span>
-    <span class="c1">#print(val)</span>
-    <span class="n">val_mod</span> <span class="o">=</span> <span class="n">val</span><span class="o">**</span><span class="mi">2</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">key_mod</span><span class="p">,</span> <span class="n">val_mod</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Miguel&#39;, &#39;Anthony&#39;, &#39;Paul&#39;, &#39;Rodrigo&#39;, &#39;Jason&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>students
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="ne">C</span>:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_27236/2359572926.py in &lt;module&gt;
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1">#val_mod = val**2</span>
-<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="n">key_mod</span><span class="p">,</span> <span class="n">val_mod</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;val_mod&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">class_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [&#39;Miguel&#39;, &#39;Anthony&#39;, &#39;Paul&#39;, &#39;Rodrigo&#39;, &#39;Jason&#39;]
+age [20, 18, 15, 20, 22]
 </pre></div>
 </div>
 </div>
@@ -1601,11 +1440,11 @@ age [20, 18, 15, 20, 22]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;random_1&#39;: array([0.77981349, 0.01011835, 0.94038728]),
- &#39;random_2&#39;: array([0.76725221, 0.75078297, 0.61888277]),
- &#39;random_3&#39;: array([0.54934833, 0.31321792, 0.96721227]),
- &#39;random_4&#39;: array([0.36236705, 0.31003589, 0.84999468]),
- &#39;random_5&#39;: array([0.96113044, 0.76248359, 0.05376629])}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;random_1&#39;: array([0.56569345, 0.56089683, 0.96734706]),
+ &#39;random_2&#39;: array([0.48409933, 0.19934475, 0.76182431]),
+ &#39;random_3&#39;: array([0.75360001, 0.46166346, 0.44059596]),
+ &#39;random_4&#39;: array([0.09959846, 0.51773989, 0.01194521]),
+ &#39;random_5&#39;: array([0.97918817, 0.60708235, 0.46980165])}
 </pre></div>
 </div>
 </div>
@@ -1659,26 +1498,6 @@ Yajaira is 25 years old.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span> <span class="p">(</span><span class="n">students</span><span class="p">)):</span>
      <span class="nb">print</span> <span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="w"> </span><span class="n">students</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="si">}</span><span class="s1"> is </span><span class="si">{</span><span class="w"> </span><span class="n">ages</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="si">}</span><span class="s1"> years old.&#39;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">)</span> <span class="p">):</span>
-     <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="w"> </span><span class="n">students</span><span class="p">[</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="si">}</span><span class="s1"> is </span><span class="si">{</span><span class="w"> </span><span class="n">ages</span><span class="p">[</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="si">}</span><span class="s1"> years old.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2228,6 +2047,11 @@ Number is 9
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2499,12 +2323,14 @@ Number is 4
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">47</span><span class="o">-</span><span class="n">a891118470e7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">80</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="c1"># comment</span>
 <span class="ne">----&gt; </span><span class="mi">4</span>         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;This is the output of exception.&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
 <span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">elif</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="c1">#number = number + 1</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;This number is </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
 
 <span class="ne">Exception</span>: This is the output of exception.
 </pre></div>

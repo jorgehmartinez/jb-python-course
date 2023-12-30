@@ -25,83 +25,109 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-driver.find_element( By.ID, 'select_ambito').click()
+# Case 1 - Download the driver
+driver = webdriver.Chrome('chromedriver.exe')
+driver.maximize_window()
+
+url = 'https://resultadoshistorico.onpe.gob.pe/EG2021/'
+driver.get( url )
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mNoSuchElementException[0m                    Traceback (most recent call last)
-Cell [1;32mIn[30], line 1[0m
-[1;32m----> 1[0m [43mdriver[49m[38;5;241;43m.[39;49m[43mfind_element[49m[43m([49m[43m [49m[43mBy[49m[38;5;241;43m.[39;49m[43mID[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mselect_ambito[39;49m[38;5;124;43m'[39;49m[43m)[49m[38;5;241m.[39mclick()
+[1;31mSeleniumManagerException[0m                  Traceback (most recent call last)
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\service.py:97[0m, in [0;36mService.start[1;34m(self)[0m
+[0;32m     96[0m [38;5;28;01mtry[39;00m:
+[1;32m---> 97[0m     path [38;5;241m=[39m [43mSeleniumManager[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mdriver_location[49m[43m([49m[43mbrowser[49m[43m)[49m
+[0;32m     98[0m [38;5;28;01mexcept[39;00m WebDriverException [38;5;28;01mas[39;00m new_err:
 
-File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py:831[0m, in [0;36mWebDriver.find_element[1;34m(self, by, value)[0m
-[0;32m    828[0m     by [38;5;241m=[39m By[38;5;241m.[39mCSS_SELECTOR
-[0;32m    829[0m     value [38;5;241m=[39m [38;5;124mf[39m[38;5;124m'[39m[38;5;124m[name=[39m[38;5;124m"[39m[38;5;132;01m{[39;00mvalue[38;5;132;01m}[39;00m[38;5;124m"[39m[38;5;124m][39m[38;5;124m'[39m
-[1;32m--> 831[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mCommand[49m[38;5;241;43m.[39;49m[43mFIND_ELEMENT[49m[43m,[49m[43m [49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43musing[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mby[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mvalue[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mvalue[49m[43m}[49m[43m)[49m[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m]
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\selenium_manager.py:81[0m, in [0;36mSeleniumManager.driver_location[1;34m(self, browser)[0m
+[0;32m     74[0m binary, browser_flag, browser, output_flag, output [38;5;241m=[39m (
+[0;32m     75[0m     [38;5;28mstr[39m([38;5;28mself[39m[38;5;241m.[39mget_binary()),
+[0;32m     76[0m     [38;5;124m"[39m[38;5;124m--browser[39m[38;5;124m"[39m,
+[1;32m   (...)[0m
+[0;32m     79[0m     [38;5;124m"[39m[38;5;124mjson[39m[38;5;124m"[39m,
+[0;32m     80[0m )
+[1;32m---> 81[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mrun[49m[43m([49m[43m([49m[43mbinary[49m[43m,[49m[43m [49m[43mbrowser_flag[49m[43m,[49m[43m [49m[43mbrowser[49m[43m,[49m[43m [49m[43moutput_flag[49m[43m,[49m[43m [49m[43moutput[49m[43m)[49m[43m)[49m
+[0;32m     82[0m executable [38;5;241m=[39m result[38;5;241m.[39msplit([38;5;124m"[39m[38;5;130;01m\t[39;00m[38;5;124m"[39m)[[38;5;241m-[39m[38;5;241m1[39m][38;5;241m.[39mstrip()
 
-File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\webdriver.py:440[0m, in [0;36mWebDriver.execute[1;34m(self, driver_command, params)[0m
-[0;32m    438[0m response [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mcommand_executor[38;5;241m.[39mexecute(driver_command, params)
-[0;32m    439[0m [38;5;28;01mif[39;00m response:
-[1;32m--> 440[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43merror_handler[49m[38;5;241;43m.[39;49m[43mcheck_response[49m[43m([49m[43mresponse[49m[43m)[49m
-[0;32m    441[0m     response[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_unwrap_value(response[38;5;241m.[39mget([38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m))
-[0;32m    442[0m     [38;5;28;01mreturn[39;00m response
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\selenium_manager.py:102[0m, in [0;36mSeleniumManager.run[1;34m(args)[0m
+[0;32m    101[0m [38;5;28;01mif[39;00m completed_proc[38;5;241m.[39mreturncode:
+[1;32m--> 102[0m     [38;5;28;01mraise[39;00m SeleniumManagerException([38;5;124mf[39m[38;5;124m"[39m[38;5;124mSelenium manager failed for: [39m[38;5;132;01m{[39;00mcommand[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;130;01m\n[39;00m[38;5;132;01m{[39;00mresult[38;5;132;01m}[39;00m[38;5;132;01m{[39;00mstderr[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[0;32m    103[0m [38;5;28;01melse[39;00m:
+[0;32m    104[0m     [38;5;66;03m# Selenium Manager exited 0 successfully, return executable path and print warnings (if any)[39;00m
 
-File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\remote\errorhandler.py:245[0m, in [0;36mErrorHandler.check_response[1;34m(self, response)[0m
-[0;32m    243[0m         alert_text [38;5;241m=[39m value[[38;5;124m"[39m[38;5;124malert[39m[38;5;124m"[39m][38;5;241m.[39mget([38;5;124m"[39m[38;5;124mtext[39m[38;5;124m"[39m)
-[0;32m    244[0m     [38;5;28;01mraise[39;00m exception_class(message, screen, stacktrace, alert_text)  [38;5;66;03m# type: ignore[call-arg]  # mypy is not smart enough here[39;00m
-[1;32m--> 245[0m [38;5;28;01mraise[39;00m exception_class(message, screen, stacktrace)
+[1;31mSeleniumManagerException[0m: Message: Selenium manager failed for: C:\Python\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json.
+The chromedriver version cannot be discovered
 
-[1;31mNoSuchElementException[0m: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="select_ambito"]"}
-  (Session info: chrome=112.0.5615.49)
-Stacktrace:
-Backtrace:
-	GetHandleVerifier [0x004FDCE3+50899]
-	(No symbol) [0x0048E111]
-	(No symbol) [0x00395588]
-	(No symbol) [0x003C08F9]
-	(No symbol) [0x003C0AFB]
-	(No symbol) [0x003EF902]
-	(No symbol) [0x003DB944]
-	(No symbol) [0x003EE01C]
-	(No symbol) [0x003DB6F6]
-	(No symbol) [0x003B7708]
-	(No symbol) [0x003B886D]
-	GetHandleVerifier [0x00763EAE+2566302]
-	GetHandleVerifier [0x007992B1+2784417]
-	GetHandleVerifier [0x0079327C+2759788]
-	GetHandleVerifier [0x00595740+672048]
-	(No symbol) [0x00498872]
-	(No symbol) [0x004941C8]
-	(No symbol) [0x004942AB]
-	(No symbol) [0x004871B7]
-	BaseThreadInitThunk [0x75D07D69+25]
-	RtlInitializeExceptionChain [0x7725B74B+107]
-	RtlClearBits [0x7725B6CF+191]
 
-NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="select_ambito"]"}
-  (Session info: chrome=112.0.5615.49)
-Stacktrace:
-Backtrace:
-	GetHandleVerifier [0x004FDCE3+50899]
-	(No symbol) [0x0048E111]
-	(No symbol) [0x00395588]
-	(No symbol) [0x003C08F9]
-	(No symbol) [0x003C0AFB]
-	(No symbol) [0x003EF902]
-	(No symbol) [0x003DB944]
-	(No symbol) [0x003EE01C]
-	(No symbol) [0x003DB6F6]
-	(No symbol) [0x003B7708]
-	(No symbol) [0x003B886D]
-	GetHandleVerifier [0x00763EAE+2566302]
-	GetHandleVerifier [0x007992B1+2784417]
-	GetHandleVerifier [0x0079327C+2759788]
-	GetHandleVerifier [0x00595740+672048]
-	(No symbol) [0x00498872]
-	(No symbol) [0x004941C8]
-	(No symbol) [0x004942AB]
-	(No symbol) [0x004871B7]
-	BaseThreadInitThunk [0x75D07D69+25]
-	RtlInitializeExceptionChain [0x7725B74B+107]
-	RtlClearBits [0x7725B6CF+191]
+During handling of the above exception, another exception occurred:
+
+[1;31mWebDriverException[0m                        Traceback (most recent call last)
+Cell [1;32mIn[4], line 2[0m
+[0;32m      1[0m [38;5;66;03m# Case 1 - Download the driver[39;00m
+[1;32m----> 2[0m driver [38;5;241m=[39m [43mwebdriver[49m[38;5;241;43m.[39;49m[43mChrome[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mchromedriver.exe[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[0;32m      3[0m driver[38;5;241m.[39mmaximize_window()
+[0;32m      5[0m url [38;5;241m=[39m [38;5;124m'[39m[38;5;124mhttps://resultadoshistorico.onpe.gob.pe/EG2021/[39m[38;5;124m'[39m
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\chrome\webdriver.py:80[0m, in [0;36mWebDriver.__init__[1;34m(self, executable_path, port, options, service_args, desired_capabilities, service_log_path, chrome_options, service, keep_alive)[0m
+[0;32m     77[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m service:
+[0;32m     78[0m     service [38;5;241m=[39m Service(executable_path, port, service_args, service_log_path)
+[1;32m---> 80[0m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[38;5;21;43m__init__[39;49m[43m([49m
+[0;32m     81[0m [43m    [49m[43mDesiredCapabilities[49m[38;5;241;43m.[39;49m[43mCHROME[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mbrowserName[39;49m[38;5;124;43m"[39;49m[43m][49m[43m,[49m
+[0;32m     82[0m [43m    [49m[38;5;124;43m"[39;49m[38;5;124;43mgoog[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[0;32m     83[0m [43m    [49m[43mport[49m[43m,[49m
+[0;32m     84[0m [43m    [49m[43moptions[49m[43m,[49m
+[0;32m     85[0m [43m    [49m[43mservice_args[49m[43m,[49m
+[0;32m     86[0m [43m    [49m[43mdesired_capabilities[49m[43m,[49m
+[0;32m     87[0m [43m    [49m[43mservice_log_path[49m[43m,[49m
+[0;32m     88[0m [43m    [49m[43mservice[49m[43m,[49m
+[0;32m     89[0m [43m    [49m[43mkeep_alive[49m[43m,[49m
+[0;32m     90[0m [43m[49m[43m)[49m
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\chromium\webdriver.py:101[0m, in [0;36mChromiumDriver.__init__[1;34m(self, browser_name, vendor_prefix, port, options, service_args, desired_capabilities, service_log_path, service, keep_alive)[0m
+[0;32m     98[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m([38;5;124m"[39m[38;5;124mservice cannot be None[39m[38;5;124m"[39m)
+[0;32m    100[0m [38;5;28mself[39m[38;5;241m.[39mservice [38;5;241m=[39m service
+[1;32m--> 101[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mservice[49m[38;5;241;43m.[39;49m[43mstart[49m[43m([49m[43m)[49m
+[0;32m    103[0m [38;5;28;01mtry[39;00m:
+[0;32m    104[0m     [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m(
+[0;32m    105[0m         command_executor[38;5;241m=[39mChromiumRemoteConnection(
+[0;32m    106[0m             remote_server_addr[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mservice[38;5;241m.[39mservice_url,
+[1;32m   (...)[0m
+[0;32m    112[0m         options[38;5;241m=[39moptions,
+[0;32m    113[0m     )
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\service.py:100[0m, in [0;36mService.start[1;34m(self)[0m
+[0;32m     98[0m         [38;5;28;01mexcept[39;00m WebDriverException [38;5;28;01mas[39;00m new_err:
+[0;32m     99[0m             logger[38;5;241m.[39mdebug([38;5;124m"[39m[38;5;124mUnable to obtain driver using Selenium Manager: [39m[38;5;124m"[39m [38;5;241m+[39m new_err[38;5;241m.[39mmsg)
+[1;32m--> 100[0m             [38;5;28;01mraise[39;00m err
+[0;32m    102[0m         [38;5;28mself[39m[38;5;241m.[39m_start_process(path)
+[0;32m    104[0m count [38;5;241m=[39m [38;5;241m0[39m
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\service.py:90[0m, in [0;36mService.start[1;34m(self)[0m
+[0;32m     83[0m [38;5;250m[39m[38;5;124;03m"""Starts the Service.[39;00m
+[0;32m     84[0m 
+[0;32m     85[0m [38;5;124;03m:Exceptions:[39;00m
+[0;32m     86[0m [38;5;124;03m - WebDriverException : Raised either when it can't start the service[39;00m
+[0;32m     87[0m [38;5;124;03m   or when it can't connect to the service[39;00m
+[0;32m     88[0m [38;5;124;03m"""[39;00m
+[0;32m     89[0m [38;5;28;01mtry[39;00m:
+[1;32m---> 90[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_start_process[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mpath[49m[43m)[49m
+[0;32m     91[0m [38;5;28;01mexcept[39;00m WebDriverException [38;5;28;01mas[39;00m err:
+[0;32m     92[0m     [38;5;28;01mif[39;00m [38;5;124m"[39m[38;5;124mexecutable needs to be in PATH[39m[38;5;124m"[39m [38;5;129;01min[39;00m err[38;5;241m.[39mmsg:
+
+File [1;32mC:\Python\Python311\Lib\site-packages\selenium\webdriver\common\service.py:218[0m, in [0;36mService._start_process[1;34m(self, path)[0m
+[0;32m    216[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err:
+[0;32m    217[0m     [38;5;28;01mif[39;00m err[38;5;241m.[39merrno [38;5;241m==[39m errno[38;5;241m.[39mENOENT:
+[1;32m--> 218[0m         [38;5;28;01mraise[39;00m WebDriverException(
+[0;32m    219[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00mos[38;5;241m.[39mpath[38;5;241m.[39mbasename([38;5;28mself[39m[38;5;241m.[39mpath)[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m executable needs to be in PATH. [39m[38;5;132;01m{[39;00m[38;5;28mself[39m[38;5;241m.[39mstart_error_message[38;5;132;01m}[39;00m[38;5;124m"[39m
+[0;32m    220[0m         )
+[0;32m    221[0m     [38;5;28;01mif[39;00m err[38;5;241m.[39merrno [38;5;241m==[39m errno[38;5;241m.[39mEACCES:
+[0;32m    222[0m         [38;5;28;01mraise[39;00m WebDriverException(
+[0;32m    223[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00mos[38;5;241m.[39mpath[38;5;241m.[39mbasename([38;5;28mself[39m[38;5;241m.[39mpath)[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m executable may have wrong permissions. [39m[38;5;132;01m{[39;00m[38;5;28mself[39m[38;5;241m.[39mstart_error_message[38;5;132;01m}[39;00m[38;5;124m"[39m
+[0;32m    224[0m         )
+
+[1;31mWebDriverException[0m: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://chromedriver.chromium.org/home
+
+WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://chromedriver.chromium.org/home
 
 
