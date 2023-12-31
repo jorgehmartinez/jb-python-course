@@ -1,8 +1,6 @@
 # Python Intensive Course
 
-You can see the online version [here](https://jorgehmartinez.github.io/jb-python-course/intro.html)
-
-This book contains the lectures of [Python Intensive Course - QLAB | PUCP](https://github.com/alexanderquispe/Diplomado_PUCP).
+This book contains the lectures of [Python Intensive Course - QLAB | PUCP](https://github.com/alexanderquispe/Diplomado_PUCP). You can see the online version [here](https://jorgehmartinez.github.io/jb-python-course/intro.html)
 
 The content was taught in two specific courses “Fundamentals of Python” & “Python Intermediate”, both were developed by [Alexander Quispe](https://alexanderquispe.github.io/) and [Anzony Quispe](https://anzonyquispe.github.io/).
 
